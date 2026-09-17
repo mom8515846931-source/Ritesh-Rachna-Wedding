@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Ritesh & Rachna | Wedding Invitation</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #f7e8e8;
+    color: #6e4148;
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.page {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* =========================================================
+   DECORATIONS
+========================================================= */
+
+.flower {
+    position: absolute;
+    font-size: 28px;
+    opacity: 0.55;
+    animation: floatFlower 5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.flower.one {
+    top: 5%;
+    left: 5%;
+}
+
+.flower.two {
+    top: 15%;
+    right: 5%;
+    animation-delay: 1s;
+}
+
+.flower.three {
+    bottom: 10%;
+    left: 8%;
+    animation-delay: 2s;
+}
+
+.flower.four {
+    bottom: 5%;
+    right: 8%;
+    animation-delay: 3s;
+}
+
+@keyframes floatFlower {
+
+    0%,100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(8deg);
+    }
+}
+
+/* =========================================================
+   COVER
+========================================================= */
+
+.cover {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    background:
+        radial-gradient(circle at top left,
+        rgba(255,255,255,.9),
+        transparent 35%),
+        linear-gradient(145deg,#f8e8e8,#ead0d3);
+}
+
+.envelope-area {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+}
+
+/* top message */
+
+.small-top {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    color: #9b686e;
+}
+
+/* Envelope */
+
+.envelope {
+    width: min(330px,85vw);
+    height: 220px;
+    margin: auto;
+    position: relative;
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+.envelope-back {
+    position: absolute;
+    inset: 0;
+    background: #d8a9af;
+    border-radius: 5px;
+    box-shadow: 0 20px 45px rgba(80,30,40,.2);
+}
+
+.envelope-front {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.envelope-front::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #e6bcc1;
+    clip-path: polygon(0 0,50% 55%,100% 0,100% 100%,0 100%);
+}
+
+.envelope-flap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #d49ea5;
+    clip-path: polygon(0 0,100% 0,50% 58%);
+    transform-origin: top center;
+    transition: transform 1.2s cubic-bezier(.65,.05,.36,1);
+    z-index: 5;
+}
+
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+}
+
+.seal {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #9b4d5b;
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%,-50%);
+    z-index: 8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Great Vibes', cursive;
+    font-size: 24px;
+    box-shadow: 0 5px 15px rgba(80,30,40,.25);
+    transition: opacity .5s;
+}
+
+.envelope.open .seal {
+    opacity: 0;
+}
+
+/* letter */
+
+.letter {
+    position: absolute;
+    width: 82%;
+    height: 90%;
+    left: 9%;
+    top: 5%;
+    background: #fffafa;
+    z-index: 3;
+    padding: 25px 15px;
+    transition: transform 1.4s ease;
+    transform: translateY(0);
+    box-shadow: 0 10px 30px rgba(0,0,0,.12);
+}
+
+.envelope.open .letter {
+    transform: translateY(-145px);
+}
+
+.letter-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 35px;
+    color: #9b4d5b;
+}
+
+.letter-sub {
+    margin-top: 10px;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+/* click */
+
+.tap {
+    margin-top: 45px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: pulse 1.7s infinite;
+}
+
+@keyframes pulse {
+    0%,100% { opacity: .4; }
+    50% { opacity: 1; }
+}
+
+/* =========================================================
+   MAIN INVITATION
+========================================================= */
+
+.invitation {
+    display: none;
+}
+
+.invitation.show {
+    display: block;
+    animation: pageAppear 1.5s ease;
+}
+
+@keyframes pageAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    min-height: 100vh;
+    padding: 70px 22px;
+    text-align: center;
+    position: relative;
+
+    background:
+        linear-gradient(rgba(255,248,248,.75),rgba(255,248,248,.92)),
+        url('couple.jpg') center/cover no-repeat;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-inner {
+    width: 100%;
+    max-width: 500px;
+}
+
+.hero-small {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(65px,18vw,110px);
+    font-weight: 400;
+    color: #8e4653;
+    line-height: .9;
+    margin: 25px 0;
+}
+
+.hero h1 span {
+    display: block;
+}
+
+.ampersand {
+    font-family: 'Cormorant Garamond',serif;
+    font-size: 42px;
+    font-style: italic;
+    margin: 8px 0;
+}
+
+.hero-date {
+    font-family: 'Cormorant Garamond',serif;
+    font-size: 25px;
+    letter-spacing: 3px;
+}
+
+.hero-place {
+    margin-top: 12px;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+/* =========================================================
+   COMMON SECTION
+========================================================= */
+
+.section {
+    padding: 85px 22px;
+    text-align: center;
+    position: relative;
+}
+
+.section:nth-child(even) {
+    background: #fff7f7;
+}
+
+.section-title {
+    font-family: 'Great Vibes',cursive;
+    font-size: 50px;
+    color: #9b4d5b;
+    font-weight: 400;
+}
+
+.section-sub {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    color: #9b686e;
+}
+
+.divider {
+    width: 70px;
+    height: 1px;
+    background: #bd858c;
+    margin: 25px auto;
+}
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.message {
+    max-width: 500px;
+    margin: auto;
+}
+
+.message p {
+    font-family: 'Cormorant Garamond',serif;
+    font-size: 22px;
+    line-height: 1.6;
+}
+
+.heart {
+    color: #a95562;
+    font-size: 25px;
+    margin: 20px;
+}
+
+/* =========================================================
+   PHOTO
+========================================================= */
+
+.photo-frame {
+    max-width: 360px;
+    margin: 35px auto 0;
+    padding: 10px;
+    background: white;
+    box-shadow: 0 12px 35px rgba(70,30,40,.16);
+}
+
+.photo-frame img {
+    width: 100%;
+    display: block;
+}
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+.reveal-box {
+    max-width: 400px;
+    margin: 35px auto 0;
+    min-height: 170px;
+    background: #f3dddd;
+    border: 1px solid #d5a4aa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.reveal-cover {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,#dfb1b7,#f3dfe1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: transform 1s ease;
+}
+
+.reveal-cover span {
+    font-family: 'Great Vibes',cursive;
+    font-size: 35px;
+}
+
+.reveal-box.revealed .reveal-cover {
+    transform: translateY(-100%);
+}
+
+.reveal-content {
+    padding: 30px;
+    font-family: 'Cormorant Garamond',serif;
+    font-size: 22px;
+}
+
+/* =========================================================
+   COUNTDOWN
+========================================================= */
+
+.countdown {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 7px;
+    max-width: 430px;
+    margin: 40px auto 0;
+}
+
+.time-box {
+    padding: 18px 4px;
+    background: #f5dfdf;
+    border: 1px solid #e1c1c4;
+}
+
+.time-number {
+    font-family: 'Cormorant Garamond',serif;
+    font-size: 30px;
+}
+
+.time-label {
+    font-size: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* =========================================================
+   EVENTS
+========================================================= */
+
+.events {
+    max-width: 550px;
+    margin: 35px auto 0;
+    text-align: left;
+}
+
+.event {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 20px;
+    padding: 22px 0;
+    border-bottom: 1px solid #e5cdd0;
+}
+
+.event-date {
+    text-align: center;
+    font-family: 'Cormorant Garamond',serif;
+}
+
+.event-date strong {
+    display: block;
+    font-size: 28px;
+}
+
+.event-date span {
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.event h3 {
+    font-family: 'Cormorant Garamond',serif;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.event p {
+    font-size: 11px;
+    line-height: 1.7;
+    margin-top: 5px;
+}
+
+/* =========================================================
+   VENUE
+========================================================= */
+
+.venue-card {
+    max-width: 470px;
+    margin: 35px auto;
+    padding: 30px 22px;
+    background: white;
+    box-shadow: 0 12px 35px rgba(70,30,40,.1);
+}
+
+.venue-icon {
+    font-size: 40px;
+}
+
+.venue-name {
+    font-family: 'Cormorant Garamond',serif;
+    font-size: 29px;
+    margin: 12px 0;
+    color: #874450;
+}
+
+.address {
+    font-size: 12px;
+    line-height: 1.8;
+    font-weight: 500;
+}
+
+.map-button {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 13px 25px;
+    background: #984d5a;
+    color: white;
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 30px;
+}
+
+/* =========================================================
+   FINAL
+========================================================= */
+
+.final {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background:
+        linear-gradient(rgba(252,238,239,.88),rgba(252,238,239,.94)),
+        url('couple.jpg') center/cover no-repeat;
+}
+
+.final-inner {
+    max-width: 500px;
+    padding: 30px;
+}
+
+.final h2 {
+    font-family: 'Great Vibes',cursive;
+    font-size: 65px;
+    font-weight: 400;
+    color: #8e4653;
+}
+
+.final p {
+    margin-top: 20px;
+    font-family: 'Cormorant Garamond',serif;
+    font-size: 24px;
+    line-height: 1.5;
+}
+
+.final-names {
+    margin-top: 35px;
+    font-family: 'Great Vibes',cursive;
+    font-size: 38px;
+    color: #9b4d5b;
+}
+
+/* =========================================================
+   MUSIC BUTTON
+========================================================= */
+
+.music-button {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: #984d5a;
+    color: white;
+    font-size: 20px;
+    z-index: 100;
+    box-shadow: 0 5px 20px rgba(0,0,0,.2);
+}
+
+/* =========================================================
+   FADE ANIMATION
+========================================================= */
+
+.fade {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease;
+}
+
+.fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media(min-width:700px) {
+
+    .section {
+        padding: 110px 30px;
+    }
+
+    .hero h1 {
+        font-size: 120px;
+    }
+
+    .event {
+        grid-template-columns: 90px 1fr;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<!-- =====================================================
+     COVER
+===================================================== -->
+
+<section class="page cover" id="cover">
+
+    <div class="flower one">✿</div>
+    <div class="flower two">❀</div>
+
+    <div class="envelope-area">
+
+        <div class="small-top">
+            Your guests open the invitation...
+        </div>
+
+        <div class="envelope" id="envelope">
+
+            <div class="envelope-back"></div>
+
+            <div class="letter">
+
+                <div class="letter-title">
+                    Ritesh
+                </div>
+
+                <div class="letter-sub">
+                    & Rachna
+                </div>
+
+                <div style="margin-top:20px;font-size:11px;">
+                    Wedding Invitation
+                </div>
+
+            </div>
+
+            <div class="envelope-front"></div>
+
+            <div class="envelope-flap"></div>
+
+            <div class="seal">
+                R ♥ R
+            </div>
+
+        </div>
+
+        <div class="tap">
+            Tap the envelope to open
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MAIN INVITATION
+===================================================== -->
+
+<main class="invitation" id="invitation">
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <div class="hero-inner">
+
+        <div class="hero-small">
+            With love & blessings
+        </div>
+
+        <h1>
+            <span>Ritesh</span>
+
+            <div class="ampersand">
+                &
+            </div>
+
+            <span>Rachna</span>
+        </h1>
+
+        <div class="hero-date">
+            06 • 12 • 2026
+        </div>
+
+        <div class="hero-place">
+            SUNDAY • 7:00 PM ONWARDS
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     INVITATION MESSAGE
+===================================================== -->
+
+<section class="section fade">
+
+    <div class="section-sub">
+        A beautiful beginning
+    </div>
+
+    <div class="section-title">
+        We are getting married
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="message">
+
+        <p>
+            We are honoured to invite you to celebrate
+            the beginning of our new journey together.
+            Your presence and blessings will make
+            our special day even more memorable.
+        </p>
+
+        <div class="heart">
+            ♥
+        </div>
+
+        <p>
+            Please join us as we promise to walk
+            through life together, hand in hand.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     COUPLE PHOTO
+===================================================== -->
+
+<section class="section fade">
+
+    <div class="section-sub">
+        Two hearts
+    </div>
+
+    <div class="section-title">
+        One beautiful journey
+    </div>
+
+    <div class="photo-frame">
+
+        <!--
+             Put your couple photo in the same folder
+             and name it:
+
+             couple.jpg
+        -->
+
+        <img src="couple.jpg"alt="Ritesh and Rachna">
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     REVEAL
+===================================================== -->
+
+<section class="section fade">
+
+    <div class="section-sub">
+        A little surprise
+    </div>
+
+    <div class="section-title">
+        Scratch to Reveal
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="reveal-box" id="revealBox">
+
+        <div class="reveal-cover">
+            <span>
+                Tap to Reveal
+            </span>
+        </div>
+
+        <div class="reveal-content">
+
+            <strong>
+                Save the Date
+            </strong>
+
+            <br><br>
+
+            6 December 2026
+
+            <br>
+
+            Sunday • 7:00 PM onwards
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     COUNTDOWN
+===================================================== -->
+
+<section class="section fade">
+
+    <div class="section-sub">
+        The countdown begins
+    </div>
+
+    <div class="section-title">
+        Until we say "I Do"
+    </div>
+
+    <div class="countdown">
+
+        <div class="time-box">
+            <div class="time-number" id="days">
+                00
+            </div>
+            <div class="time-label">
+                Days
+            </div>
+        </div>
+
+        <div class="time-box">
+            <div class="time-number" id="hours">
+                00
+            </div>
+            <div class="time-label">
+                Hours
+            </div>
+        </div>
+
+        <div class="time-box">
+            <div class="time-number" id="minutes">
+                00
+            </div>
+            <div class="time-label">
+                Minutes
+            </div>
+        </div>
+
+        <div class="time-box">
+            <div class="time-number" id="seconds">
+                00
+            </div>
+            <div class="time-label">
+                Seconds
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     EVENTS
+===================================================== -->
+
+<section class="section fade">
+
+    <div class="section-sub">
+        Celebrations
+    </div>
+
+    <div class="section-title">
+        Wedding Events
+    </div>
+
+    <div class="divider"></div>
+
+
+    <div class="events">
+
+
+        <!-- KUMRAM BHOJ -->
+
+        <div class="event">
+
+            <div class="event-date">
+
+                <strong>
+                    03
+                </strong>
+
+                <span>
+                    Dec
+                </span>
+
+            </div>
+
+            <div>
+
+                <h3>
+                    Kumram Bhoj
+                </h3>
+
+                <p>
+                    Thursday • 7:00 PM onwards
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- HALDI -->
+
+        <div class="event">
+
+            <div class="event-date">
+
+                <strong>
+                    04
+                </strong>
+
+                <span>
+                    Dec
+                </span>
+
+            </div>
+
+            <div>
+
+                <h3>
+                    Haldi
+                </h3>
+
+                <p>
+                    Friday • 12:00 PM
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- MEHNDI -->
+
+        <div class="event">
+
+            <div class="event-date">
+
+                <strong>
+                    04
+                </strong>
+
+                <span>
+                    Dec
+                </span>
+
+            </div>
+
+            <div>
+
+                <h3>
+                    Mehndi
+                </h3>
+
+                <p>
+                    Friday • 6:00 PM
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- KUMRAM -->
+
+        <div class="event">
+
+            <div class="event-date">
+
+                <strong>
+                    05
+                </strong>
+
+                <span>
+                    Dec
+                </span>
+
+            </div>
+
+            <div>
+
+                <h3>
+                    Kumram
+                </h3>
+
+                <p>
+                    Saturday • 6:00 PM
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- WEDDING -->
+
+        <div class="event">
+
+            <div class="event-date">
+
+                <strong>
+                    06
+                </strong>
+
+                <span>
+                    Dec
+                </span>
+
+            </div>
+
+            <div>
+
+                <h3>
+                    Wedding Ceremony
+                </h3>
+
+                <p>
+                    Sunday • 7:00 PM onwards
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     VENUE
+===================================================== -->
+
+<section class="section fade">
+
+    <div class="section-sub">
+        Where we celebrate
+    </div>
+
+    <div class="section-title">
+        The Venue
+    </div>
+
+    <div class="divider"></div>
+
+
+    <div class="venue-card">
+
+        <div class="venue-icon">
+            ♡
+        </div>
+
+        <div class="venue-name">
+            Mithila Watika
+        </div>
+
+        <div class="address">
+
+            Ward No 3, Mithila Watika –
+            Banquet | Corporate Hall |
+            Open Lawn for Marriage
+
+            <br>
+
+            Madhubani, Mangrauni Road,
+            Sankat Mochan Colony,
+            Mangalbani, Madhubani,
+            Bihar – 847213
+
+        </div>
+
+
+        <!--
+             Google Maps search.
+             You can replace this URL with your
+             exact Google Maps location later.
+        -->
+
+        <a class="map-button"
+           href="https://www.google.com/maps/search/?api=1&query=Mithila+Watika+Madhubani+Bihar+847213"
+           target="_blank">
+
+            📍 Open Location
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FINAL MESSAGE
+===================================================== -->
+
+<section class="section final fade">
+
+    <div class="final-inner">
+
+        <div class="section-sub">
+            With all our hearts
+        </div>
+
+        <h2>
+            We can't wait
+        </h2>
+
+        <p>
+            to celebrate this beautiful
+            beginning with you!
+        </p>
+
+        <div class="final-names">
+            Ritesh & Rachna
+        </div>
+
+        <div style="margin-top:25px;font-size:12px;letter-spacing:2px;">
+            06 • 12 • 2026
+        </div>
+
+        <div style="margin-top:25px;">
+            ♥
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =====================================================
+     MUSIC
+===================================================== -->
+
+<button class="music-button" id="musicButton">
+    ♪
+</button>
+
+<!--
+     Put your wedding background music in the same folder
+     and name it:
+
+     wedding-music.mp3
+-->
+
+<audio id="weddingMusic"
+       loop
+       preload="auto">
+
+    <source src="wedding-music.mp3"
+            type="audio/mpeg">
+
+</audio>
+
+
+<script>
+
+/* =========================================================
+   ENVELOPE OPEN
+========================================================= */
+
+const envelope =
+    document.getElementById("envelope");
+
+const invitation =
+    document.getElementById("invitation");
+
+const cover =
+    document.getElementById("cover");
+
+
+envelope.addEventListener("click", function () {
+
+    envelope.classList.add("open");
+
+    setTimeout(function () {
+
+        cover.style.display = "none";
+
+        invitation.classList.add("show");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }, 1700);
+
+});
+
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+const revealBox =
+    document.getElementById("revealBox");
+
+revealBox.addEventListener("click", function () {
+
+    revealBox.classList.add("revealed");
+
+});
+
+
+/* =========================================================
+   COUNTDOWN
+========================================================= */
+
+const weddingDate =
+    new Date("December 6, 2026 19:00:00").getTime();
+
+
+function updateCountdown() {
+
+    const now =
+        new Date().getTime();
+
+    const difference =
+        weddingDate - now;
+
+
+    if (difference <= 0) {
+
+        document.getElementById("days").innerText = "00";
+        document.getElementById("hours").innerText = "00";
+        document.getElementById("minutes").innerText = "00";
+        document.getElementById("seconds").innerText = "00";
+
+        return;
+    }
+
+
+    const days =
+        Math.floor(
+            difference /
+            (1000 * 60 * 60 * 24)
+        );
+
+
+    const hours =
+        Math.floor(
+            (difference /
+            (1000 * 60 * 60)) % 24
+        );
+
+
+    const minutes =
+        Math.floor(
+            (difference /
+            (1000 * 60)) % 60
+        );
+
+
+    const seconds =
+        Math.floor(
+            (difference /
+            1000) % 60
+        );
+
+
+    document.getElementById("days")
+        .innerText =
+        String(days).padStart(2,"0");
+
+
+    document.getElementById("hours")
+        .innerText =
+        String(hours).padStart(2,"0");
+
+
+    document.getElementById("minutes")
+        .innerText =
+        String(minutes).padStart(2,"0");
+
+
+    document.getElementById("seconds")
+        .innerText =
+        String(seconds).padStart(2,"0");
+
+}
+
+
+updateCountdown();
+
+setInterval(updateCountdown,1000);
+
+
+/* =========================================================
+   SCROLL ANIMATION
+========================================================= */
+
+const observer =
+    new IntersectionObserver(
+        function(entries) {
+
+            entries.forEach(
+                function(entry) {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target
+                            .classList
+                            .add("visible");
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold: 0.15
+        }
+    );
+
+
+document
+    .querySelectorAll(".fade")
+    .forEach(
+        function(element) {
+
+            observer.observe(element);
+
+        }
+    );
+
+
+/* =========================================================
+   MUSIC
+========================================================= */
+
+const music =
+    document.getElementById("weddingMusic");
+
+const musicButton =
+    document.getElementById("musicButton");
+
+let musicPlaying = false;
+
+
+musicButton.addEventListener("click", function () {
+
+    if (!musicPlaying) {
+
+        music.play()
+            .then(function() {
+
+                musicPlaying = true;
+
+                musicButton.innerText = "❚❚";
+
+            })
+            .catch(function(error) {
+
+                console.log(
+                    "Music could not start:",
+                    error
+                );
+
+            });
+
+    } else {
+
+        music.pause();
+
+        musicPlaying = false;
+
+        musicButton.innerText = "♪";
+
+    }
+
+});
+
+
+/* =========================================================
+   START MUSIC AFTER ENVELOPE TAP
+========================================================= */
+
+envelope.addEventListener("click", function () {
+
+    music.play()
+        .then(function() {
+
+            musicPlaying = true;
+
+            musicButton.innerText = "❚❚";
+
+        })
+        .catch(function() {
+
+            // Browser may block autoplay.
+            // User can press the music button.
+
+        });
+
+});
+
+
+</script>
+
+</body>
+</html>
