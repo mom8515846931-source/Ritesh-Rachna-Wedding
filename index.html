@@ -1,9 +1,22 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport"
-content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<!DOCTYPE html>
+<html lang="en">
 
-<title>Ritesh & Rachna | Wedding Invitation</title><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap"
-      rel="stylesheet"><style>
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Ritesh & Rachna | Wedding Invitation</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet">
+
+<style>
 
 /* =========================================================
    GLOBAL
@@ -49,6 +62,7 @@ section{
     align-items:center;
     justify-content:center;
     padding:25px;
+
     background:
         radial-gradient(
             circle at top left,
@@ -88,6 +102,7 @@ section{
     position:relative;
     cursor:pointer;
     perspective:1000px;
+    touch-action:manipulation;
 }
 
 .envelope-back{
@@ -95,7 +110,10 @@ section{
     inset:0;
     background:#d8a9af;
     border-radius:5px;
-    box-shadow:0 20px 45px rgba(80,30,40,.25);
+
+    box-shadow:
+        0 20px 45px
+        rgba(80,30,40,.25);
 }
 
 .envelope-front{
@@ -110,7 +128,9 @@ section{
     position:absolute;
     width:100%;
     height:100%;
+
     background:#e6bcc1;
+
     clip-path:polygon(
         0 0,
         50% 55%,
@@ -124,15 +144,21 @@ section{
     position:absolute;
     width:100%;
     height:100%;
+
     background:#d49ea5;
+
     clip-path:polygon(
         0 0,
         100% 0,
         50% 58%
     );
+
     transform-origin:top center;
+
     transition:
-        transform 1.2s cubic-bezier(.65,.05,.36,1);
+        transform 1.2s
+        cubic-bezier(.65,.05,.36,1);
+
     z-index:5;
 }
 
@@ -147,16 +173,27 @@ section{
 
 .letter{
     position:absolute;
+
     width:82%;
     height:90%;
+
     left:9%;
     top:5%;
+
     background:#fffafa;
+
     z-index:3;
+
     padding:25px 15px;
-    transition:transform 1.4s ease;
+
+    transition:
+        transform 1.4s ease;
+
     transform:translateY(0);
-    box-shadow:0 10px 30px rgba(0,0,0,.12);
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.12);
 }
 
 .envelope.open .letter{
@@ -183,20 +220,33 @@ section{
 .seal{
     width:65px;
     height:65px;
+
     border-radius:50%;
+
     background:#8b3f50;
     color:#fff;
+
     position:absolute;
+
     left:50%;
     top:55%;
-    transform:translate(-50%,-50%);
+
+    transform:
+        translate(-50%,-50%);
+
     z-index:8;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     font-family:'Great Vibes',cursive;
     font-size:24px;
-    box-shadow:0 5px 15px rgba(80,30,40,.25);
+
+    box-shadow:
+        0 5px 15px
+        rgba(80,30,40,.25);
+
     transition:opacity .5s;
 }
 
@@ -211,14 +261,18 @@ section{
 
 .tap{
     margin-top:45px;
+
     font-size:11px;
     letter-spacing:3px;
     text-transform:uppercase;
+
     color:#6f3946;
+
     animation:pulse 1.7s infinite;
 }
 
 @keyframes pulse{
+
     0%,100%{
         opacity:.4;
     }
@@ -226,6 +280,7 @@ section{
     50%{
         opacity:1;
     }
+
 }
 
 
@@ -248,18 +303,27 @@ section{
 
 .hero{
     min-height:100vh;
+
     padding:70px 22px;
+
     text-align:center;
+
     position:relative;
 
     background:
         url('couple.jpg')
-        center center/
+        center 42%/
         cover no-repeat;
+
+    /*
+       FIX 1:
+       Background image moved slightly upward.
+    */
 
     background-size:cover;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
@@ -267,6 +331,7 @@ section{
 }
 
 .invitation.show .hero{
+
     animation:
         heroBackground
         5.5s
@@ -278,26 +343,32 @@ section{
 
     0%{
         background-size:106%;
+        background-position:center 42%;
         filter:brightness(.92);
     }
 
     100%{
         background-size:cover;
+        background-position:center 42%;
         filter:brightness(1);
     }
 
 }
 
 .hero::before{
+
     content:"";
+
     position:absolute;
     inset:0;
+
     background:
         linear-gradient(
             to bottom,
             rgba(20,8,15,.10),
             rgba(20,8,15,.22)
         );
+
     z-index:0;
 }
 
@@ -307,14 +378,18 @@ section{
 }
 
 .hero-item{
+
     opacity:0;
+
     transform:
         translateY(30px)
         scale(.985);
+
     filter:blur(7px);
 }
 
 .invitation.show .hero-item{
+
     animation:
         heroReveal
         1.7s
@@ -350,34 +425,44 @@ section{
 
     0%{
         opacity:0;
+
         transform:
             translateY(30px)
             scale(.985);
+
         filter:blur(7px);
     }
 
     55%{
         opacity:.85;
+
         transform:
             translateY(-3px)
             scale(1.005);
+
         filter:blur(1px);
     }
 
     100%{
         opacity:1;
+
         transform:
             translateY(0)
             scale(1);
+
         filter:blur(0);
     }
 
 }
 
 .hero-small{
+
     font-size:11px;
+
     letter-spacing:4px;
+
     text-transform:uppercase;
+
     color:#fff8e7;
 
     text-shadow:
@@ -386,11 +471,18 @@ section{
 }
 
 .hero h1{
+
     font-family:'Great Vibes',cursive;
-    font-size:clamp(65px,18vw,110px);
+
+    font-size:
+        clamp(65px,18vw,110px);
+
     font-weight:400;
+
     color:#F8E8C8;
+
     line-height:.9;
+
     margin:25px 0;
 
     text-shadow:
@@ -406,10 +498,15 @@ section{
 }
 
 .ampersand{
+
     font-family:'Cormorant Garamond',serif;
+
     font-size:42px;
+
     font-style:italic;
+
     margin:8px 0;
+
     color:#F8E8C8;
 
     text-shadow:
@@ -421,9 +518,13 @@ section{
 }
 
 .hero-date{
+
     font-family:'Cormorant Garamond',serif;
+
     font-size:25px;
+
     letter-spacing:3px;
+
     color:#FFF4D6;
 
     text-shadow:
@@ -432,9 +533,13 @@ section{
 }
 
 .hero-place{
+
     margin-top:12px;
+
     font-size:11px;
+
     letter-spacing:2px;
+
     color:#FFF4D6;
 
     text-shadow:
@@ -448,8 +553,11 @@ section{
 ========================================================= */
 
 .scroll-down{
+
     position:absolute;
+
     bottom:25px;
+
     left:50%;
 
     transform:
@@ -459,24 +567,30 @@ section{
     z-index:20;
 
     text-align:center;
+
     text-decoration:none;
 
     color:#fff8e7;
 
     opacity:0;
 
-    background:rgba(74,24,48,.84);
+    background:
+        rgba(74,24,48,.84);
 
-    border:1px solid rgba(248,232,200,.55);
+    border:
+        1px solid
+        rgba(248,232,200,.55);
 
     border-radius:30px;
 
-    padding:7px 14px 9px;
+    padding:
+        7px 14px 9px;
 
     min-width:105px;
 
     box-shadow:
-        0 6px 18px rgba(58,23,41,.30);
+        0 6px 18px
+        rgba(58,23,41,.30);
 
     backdrop-filter:blur(3px);
     -webkit-backdrop-filter:blur(3px);
@@ -486,6 +600,7 @@ section{
 }
 
 .invitation.show .hero .scroll-down{
+
     animation:
         scrollAppear
         1.5s
@@ -498,13 +613,17 @@ section{
 @keyframes scrollAppear{
 
     from{
+
         opacity:0;
+
         transform:
             translate(-50%,15px);
     }
 
     to{
+
         opacity:1;
+
         transform:
             translate(-50%,0);
     }
@@ -512,11 +631,17 @@ section{
 }
 
 .scroll-text{
+
     display:block;
+
     font-size:8px;
+
     letter-spacing:2px;
+
     text-transform:uppercase;
+
     margin-bottom:5px;
+
     color:#fff8e7;
 
     text-shadow:
@@ -526,8 +651,11 @@ section{
 }
 
 .scroll-arrow{
+
     display:block;
+
     font-size:25px;
+
     line-height:1;
 
     color:#F8E8C8;
@@ -564,6 +692,7 @@ section{
 ========================================================= */
 
 .section{
+
     min-height:100vh;
 
     padding:
@@ -576,8 +705,11 @@ section{
     position:relative;
 
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
+
     justify-content:center;
 }
 
@@ -587,15 +719,15 @@ section{
 ========================================================= */
 
 .fade > *{
+
     opacity:0;
+
     transform:
         translateY(30px)
         scale(.985);
+
     filter:blur(6px);
 }
-
-
-/* Main section elements only */
 
 .fade.visible > *:not(.section-scroll){
 
@@ -604,13 +736,7 @@ section{
         1.45s
         cubic-bezier(.22,1,.36,1)
         forwards;
-
 }
-
-
-/* IMPORTANT:
-   Scroll indicator NEVER receives blur.
-*/
 
 .fade > .section-scroll{
 
@@ -622,11 +748,7 @@ section{
 
     filter:none !important;
     -webkit-filter:none !important;
-
 }
-
-
-/* Scroll indicator gets its own animation */
 
 .fade.visible > .section-scroll{
 
@@ -638,11 +760,7 @@ section{
 
     filter:none !important;
     -webkit-filter:none !important;
-
 }
-
-
-/* Scroll indicator children */
 
 .section-scroll,
 .section-scroll span,
@@ -650,47 +768,52 @@ section{
 
     filter:none !important;
     -webkit-filter:none !important;
-
 }
 
 .section-scroll span,
 .section-scroll strong{
 
     opacity:1 !important;
-
 }
-
 
 @keyframes smoothPageReveal{
 
     0%{
         opacity:0;
+
         transform:
             translateY(30px)
             scale(.985);
+
         filter:blur(6px);
     }
 
     55%{
         opacity:.9;
+
         transform:
             translateY(-2px)
             scale(1.002);
+
         filter:blur(1px);
     }
 
     100%{
         opacity:1;
+
         transform:
             translateY(0)
             scale(1);
+
         filter:blur(0);
     }
 
 }
 
 
-/* Sequential section timing */
+/* =========================================================
+   SEQUENTIAL SECTION TIMING
+========================================================= */
 
 .fade.visible > .section-sub{
     animation-delay:.25s;
@@ -737,11 +860,6 @@ section{
    SECOND PAGE — QUOTE SEQUENTIAL ANIMATION
 ========================================================= */
 
-/*
-   The message itself is kept hidden initially.
-   Each paragraph and the heart are revealed separately.
-*/
-
 #message .message p,
 #message .message .heart{
 
@@ -751,11 +869,7 @@ section{
         translateY(25px);
 
     filter:blur(5px);
-
 }
-
-
-/* First paragraph */
 
 .fade.visible#message .message p:nth-of-type(1){
 
@@ -766,11 +880,7 @@ section{
         forwards;
 
     animation-delay:2.8s;
-
 }
-
-
-/* Heart */
 
 .fade.visible#message .message .heart{
 
@@ -781,11 +891,7 @@ section{
         forwards;
 
     animation-delay:4.3s;
-
 }
-
-
-/* Second paragraph */
 
 .fade.visible#message .message p:nth-of-type(2){
 
@@ -796,43 +902,35 @@ section{
         forwards;
 
     animation-delay:5.6s;
-
 }
-
 
 @keyframes quoteReveal{
 
     0%{
-
         opacity:0;
 
         transform:
             translateY(25px);
 
         filter:blur(5px);
-
     }
 
     55%{
-
         opacity:.9;
 
         transform:
             translateY(-2px);
 
         filter:blur(1px);
-
     }
 
     100%{
-
         opacity:1;
 
         transform:
             translateY(0);
 
         filter:blur(0);
-
     }
 
 }
@@ -860,7 +958,6 @@ section{
         1.25s
         cubic-bezier(.22,1,.36,1)
         forwards;
-
 }
 
 .fade.visible .events .event:nth-child(1){
@@ -887,17 +984,21 @@ section{
 
     0%{
         opacity:0;
+
         transform:
             translateY(25px)
             scale(.99);
+
         filter:blur(4px);
     }
 
     100%{
         opacity:1;
+
         transform:
             translateY(0)
             scale(1);
+
         filter:blur(0);
     }
 
@@ -915,7 +1016,6 @@ section{
     transform:
         translateY(20px)
         scale(.97);
-
 }
 
 .fade.visible .countdown .time-box{
@@ -925,7 +1025,6 @@ section{
         1.1s
         cubic-bezier(.22,1,.36,1)
         forwards;
-
 }
 
 .fade.visible .countdown .time-box:nth-child(1){
@@ -947,14 +1046,18 @@ section{
 @keyframes countReveal{
 
     from{
+
         opacity:0;
+
         transform:
             translateY(20px)
             scale(.97);
     }
 
     to{
+
         opacity:1;
+
         transform:
             translateY(0)
             scale(1);
@@ -1014,11 +1117,7 @@ section{
 
     filter:none !important;
     -webkit-filter:none !important;
-
 }
-
-
-/* Separate scroll animation */
 
 @keyframes sectionScrollAppear{
 
@@ -1029,7 +1128,6 @@ section{
         transform:
             translateX(-50%)
             translateY(15px);
-
     }
 
     to{
@@ -1039,13 +1137,9 @@ section{
         transform:
             translateX(-50%)
             translateY(0);
-
     }
 
 }
-
-
-/* Scroll text */
 
 .section-scroll span{
 
@@ -1068,11 +1162,7 @@ section{
 
     filter:none !important;
     -webkit-filter:none !important;
-
 }
-
-
-/* Scroll arrow */
 
 .section-scroll strong{
 
@@ -1099,12 +1189,11 @@ section{
 
     filter:none !important;
     -webkit-filter:none !important;
-
 }
 
 
 /* =========================================================
-   BACK TO TOP BUTTON — LAST PAGE
+   BACK TO TOP BUTTON
 ========================================================= */
 
 .back-to-top{
@@ -1119,18 +1208,23 @@ section{
 
     color:#fff8e7;
 
-    background:rgba(74,24,48,.88);
+    background:
+        rgba(74,24,48,.88);
 
-    border:1px solid rgba(248,232,200,.6);
+    border:
+        1px solid
+        rgba(248,232,200,.6);
 
     border-radius:30px;
 
-    padding:8px 16px 10px;
+    padding:
+        8px 16px 10px;
 
     min-width:115px;
 
     box-shadow:
-        0 6px 18px rgba(58,23,41,.30);
+        0 6px 18px
+        rgba(58,23,41,.30);
 
     backdrop-filter:blur(3px);
 
@@ -1182,9 +1276,7 @@ section{
 }
 
 .back-to-top:active{
-
     transform:scale(.95);
-
 }
 
 @keyframes backTopArrow{
@@ -1222,7 +1314,6 @@ section{
     color:#9b4d5b;
 
     font-weight:400;
-
 }
 
 .section-sub{
@@ -1236,7 +1327,6 @@ section{
     margin-top:10px;
 
     color:#9b686e;
-
 }
 
 .divider{
@@ -1248,7 +1338,6 @@ section{
     background:#bd858c;
 
     margin:25px auto;
-
 }
 
 
@@ -1261,7 +1350,6 @@ section{
     max-width:500px;
 
     margin:auto;
-
 }
 
 .message p{
@@ -1271,7 +1359,6 @@ section{
     font-size:22px;
 
     line-height:1.6;
-
 }
 
 .heart{
@@ -1281,7 +1368,6 @@ section{
     font-size:25px;
 
     margin:20px;
-
 }
 
 
@@ -1302,7 +1388,6 @@ section{
     box-shadow:
         0 12px 35px
         rgba(70,30,40,.16);
-
 }
 
 .fade.visible .photo-frame img{
@@ -1312,7 +1397,6 @@ section{
         2s
         cubic-bezier(.22,1,.36,1)
         forwards;
-
 }
 
 .photo-frame img{
@@ -1326,7 +1410,6 @@ section{
     transform:scale(1.035);
 
     filter:blur(3px);
-
 }
 
 @keyframes photoReveal{
@@ -1338,7 +1421,6 @@ section{
         transform:scale(1.035);
 
         filter:blur(3px);
-
     }
 
     to{
@@ -1348,7 +1430,6 @@ section{
         transform:scale(1);
 
         filter:blur(0);
-
     }
 
 }
@@ -1370,7 +1451,9 @@ section{
 
     background:#f3dddd;
 
-    border:1px solid #d5a4aa;
+    border:
+        1px solid
+        #d5a4aa;
 
     display:flex;
 
@@ -1383,7 +1466,6 @@ section{
     overflow:hidden;
 
     cursor:pointer;
-
 }
 
 .reveal-cover{
@@ -1402,14 +1484,12 @@ section{
     display:flex;
 
     align-items:center;
-
     justify-content:center;
 
     z-index:2;
 
     transition:
         transform 1s ease;
-
 }
 
 .reveal-cover span{
@@ -1417,13 +1497,10 @@ section{
     font-family:'Great Vibes',cursive;
 
     font-size:35px;
-
 }
 
 .reveal-box.revealed .reveal-cover{
-
     transform:translateY(-100%);
-
 }
 
 .reveal-content{
@@ -1439,11 +1516,12 @@ section{
     position:relative;
 
     z-index:1;
-
 }
 
 
-/* Calendar button */
+/* =========================================================
+   CALENDAR BUTTON
+========================================================= */
 
 .calendar-button{
 
@@ -1452,8 +1530,7 @@ section{
     margin-top:18px;
 
     padding:
-        11px
-        18px;
+        11px 18px;
 
     background:#984d5a;
 
@@ -1483,15 +1560,11 @@ section{
 }
 
 .calendar-button:active{
-
     transform:scale(.96);
-
 }
 
 .calendar-button:hover{
-
     background:#874450;
-
 }
 
 
@@ -1513,7 +1586,6 @@ section{
     max-width:430px;
 
     margin:40px auto 0;
-
 }
 
 .time-box{
@@ -1523,8 +1595,9 @@ section{
 
     background:#f5dfdf;
 
-    border:1px solid #e1c1c4;
-
+    border:
+        1px solid
+        #e1c1c4;
 }
 
 .time-number{
@@ -1532,7 +1605,6 @@ section{
     font-family:'Cormorant Garamond',serif;
 
     font-size:30px;
-
 }
 
 .time-label{
@@ -1542,7 +1614,6 @@ section{
     letter-spacing:1px;
 
     text-transform:uppercase;
-
 }
 
 
@@ -1559,7 +1630,6 @@ section{
     margin:35px auto 0;
 
     text-align:left;
-
 }
 
 .event{
@@ -1576,7 +1646,6 @@ section{
     border-bottom:
         1px solid
         #e5cdd0;
-
 }
 
 .event-date{
@@ -1584,7 +1653,6 @@ section{
     text-align:center;
 
     font-family:'Cormorant Garamond',serif;
-
 }
 
 .event-date strong{
@@ -1592,7 +1660,6 @@ section{
     display:block;
 
     font-size:28px;
-
 }
 
 .event-date span{
@@ -1600,7 +1667,6 @@ section{
     font-size:10px;
 
     text-transform:uppercase;
-
 }
 
 .event h3{
@@ -1610,7 +1676,6 @@ section{
     font-size:25px;
 
     font-weight:600;
-
 }
 
 .event p{
@@ -1620,7 +1685,6 @@ section{
     line-height:1.7;
 
     margin-top:5px;
-
 }
 
 
@@ -1644,13 +1708,10 @@ section{
     box-shadow:
         0 12px 35px
         rgba(70,30,40,.1);
-
 }
 
 .venue-icon{
-
     font-size:40px;
-
 }
 
 .venue-name{
@@ -1662,7 +1723,6 @@ section{
     margin:12px 0;
 
     color:#874450;
-
 }
 
 .address{
@@ -1672,7 +1732,6 @@ section{
     line-height:1.8;
 
     font-weight:500;
-
 }
 
 
@@ -1687,8 +1746,7 @@ section{
     margin-top:25px;
 
     padding:
-        13px
-        25px;
+        13px 25px;
 
     background:#984d5a;
 
@@ -1712,13 +1770,10 @@ section{
 
     transition:
         transform .25s ease;
-
 }
 
 .map-button:active{
-
     transform:scale(.96);
-
 }
 
 
@@ -1733,7 +1788,6 @@ section{
     background:
         url('couple.jpg')
         center/cover no-repeat;
-
 }
 
 .final::before{
@@ -1746,7 +1800,6 @@ section{
 
     background:
         rgba(255,245,245,.82);
-
 }
 
 .final-inner{
@@ -1758,7 +1811,6 @@ section{
     max-width:500px;
 
     padding:30px;
-
 }
 
 .final h2{
@@ -1770,7 +1822,6 @@ section{
     font-weight:400;
 
     color:#8e4653;
-
 }
 
 .final p{
@@ -1782,7 +1833,6 @@ section{
     font-size:24px;
 
     line-height:1.5;
-
 }
 
 .final-names{
@@ -1794,7 +1844,6 @@ section{
     font-size:38px;
 
     color:#9b4d5b;
-
 }
 
 
@@ -1830,6 +1879,9 @@ section{
         0 5px 20px
         rgba(0,0,0,.25);
 
+    cursor:pointer;
+
+    touch-action:manipulation;
 }
 
 
@@ -1844,7 +1896,6 @@ section{
     transform:none;
 
     transition:none;
-
 }
 
 
@@ -1860,20 +1911,16 @@ section{
             110px
             30px
             120px;
-
     }
 
     .hero h1{
-
         font-size:120px;
-
     }
 
     .event{
 
         grid-template-columns:
             90px 1fr;
-
     }
 
 }
@@ -1886,21 +1933,15 @@ section{
 @media(max-width:380px){
 
     .hero h1{
-
         font-size:65px;
-
     }
 
     .section-title{
-
         font-size:44px;
-
     }
 
     .message p{
-
         font-size:20px;
-
     }
 
     .section-scroll{
@@ -1911,7 +1952,6 @@ section{
             7px
             12px
             9px;
-
     }
 
 }
@@ -1932,14 +1972,24 @@ section{
         transition-duration:.01ms!important;
 
         scroll-behavior:auto!important;
-
     }
 
 }
 
-</style></head><body><!-- =======================================================
+</style>
+
+</head>
+
+<body>
+
+
+<!-- =======================================================
      COVER
-======================================================= --><section class="page cover" id="cover"><div class="envelope-area">
+======================================================= -->
+
+<section class="page cover" id="cover">
+
+<div class="envelope-area">
 
     <div class="small-top">
         Your guests open the invitation...
@@ -1986,11 +2036,24 @@ section{
 
 </div>
 
-</section><!-- =======================================================
+</section>
+
+
+
+<!-- =======================================================
      MAIN INVITATION
-======================================================= --><main class="invitation" id="invitation"><!-- =======================================================
+======================================================= -->
+
+<main class="invitation" id="invitation">
+
+
+<!-- =======================================================
      HERO
-======================================================= --><section class="hero" id="hero"><div class="hero-inner">
+======================================================= -->
+
+<section class="hero" id="hero">
+
+<div class="hero-inner">
 
     <div class="hero-small hero-item">
         With love & blessings
@@ -2026,8 +2089,6 @@ section{
 </div>
 
 
-<!-- HERO SCROLL -->
-
 <a href="#message" class="scroll-down">
 
     <span class="scroll-text">
@@ -2040,9 +2101,17 @@ section{
 
 </a>
 
-</section><!-- =======================================================
+</section>
+
+
+
+<!-- =======================================================
      MESSAGE
-======================================================= --><section class="section fade" id="message"><div class="section-sub">
+======================================================= -->
+
+<section class="section fade" id="message">
+
+<div class="section-sub">
     A beautiful beginning
 </div>
 
@@ -2090,9 +2159,17 @@ section{
 
 </a>
 
-</section><!-- =======================================================
+</section>
+
+
+
+<!-- =======================================================
      PHOTO
-======================================================= --><section class="section fade" id="photo"><div class="section-sub">
+======================================================= -->
+
+<section class="section fade" id="photo">
+
+<div class="section-sub">
     Two hearts
 </div>
 
@@ -2124,9 +2201,17 @@ section{
 
 </a>
 
-</section><!-- =======================================================
+</section>
+
+
+
+<!-- =======================================================
      SAVE THE DATE / REVEAL
-======================================================= --><section class="section fade" id="reveal"><div class="section-sub">
+======================================================= -->
+
+<section class="section fade" id="reveal">
+
+<div class="section-sub">
     A little surprise
 </div>
 
@@ -2167,8 +2252,6 @@ section{
         <br>
 
 
-        <!-- GOOGLE CALENDAR -->
-
         <a
             class="calendar-button"
             id="calendarButton"
@@ -2194,9 +2277,17 @@ section{
 
 </a>
 
-</section><!-- =======================================================
+</section>
+
+
+
+<!-- =======================================================
      COUNTDOWN
-======================================================= --><section class="section fade" id="countdown"><div class="section-sub">
+======================================================= -->
+
+<section class="section fade" id="countdown">
+
+<div class="section-sub">
     The countdown begins
 </div>
 
@@ -2286,9 +2377,17 @@ section{
 
 </a>
 
-</section><!-- =======================================================
+</section>
+
+
+
+<!-- =======================================================
      EVENTS
-======================================================= --><section class="section fade" id="events"><div class="section-sub">
+======================================================= -->
+
+<section class="section fade" id="events">
+
+<div class="section-sub">
     Celebrations
 </div>
 
@@ -2473,9 +2572,17 @@ section{
 
 </a>
 
-</section><!-- =======================================================
+</section>
+
+
+
+<!-- =======================================================
      VENUE
-======================================================= --><section class="section fade" id="venue"><div class="section-sub">
+======================================================= -->
+
+<section class="section fade" id="venue">
+
+<div class="section-sub">
     Where we celebrate
 </div>
 
@@ -2517,8 +2624,6 @@ section{
     </div>
 
 
-    <!-- MOBILE FRIENDLY GOOGLE MAPS -->
-
     <a
         class="map-button"
         id="mapButton"
@@ -2542,9 +2647,17 @@ section{
 
 </a>
 
-</section><!-- =======================================================
+</section>
+
+
+
+<!-- =======================================================
      FINAL
-======================================================= --><section class="section final fade" id="final"><div class="final-inner">
+======================================================= -->
+
+<section class="section final fade" id="final">
+
+<div class="final-inner">
 
     <div class="section-sub">
         With all our hearts
@@ -2583,10 +2696,6 @@ section{
     </div>
 
 
-    <!-- =================================================
-         BACK TO TOP
-    ================================================== -->
-
     <a href="#hero" class="back-to-top">
 
         <span>
@@ -2601,29 +2710,42 @@ section{
 
 </div>
 
-</section></main><!-- =======================================================
+</section>
+
+</main>
+
+
+
+<!-- =======================================================
      MUSIC BUTTON
-======================================================= --><button
-class="music-button"
-id="musicButton"
+======================================================= -->
 
-«»
+<button
+    class="music-button"
+    id="musicButton"
+    type="button"
+    aria-label="Play or pause wedding music"
+>
+    ♪
+</button>
 
-♪
 
-</button><audio
-id="weddingMusic"
-loop
-preload="auto"
-
-«»
-
-<source
-    src="wedding-music.mp3"
-    type="audio/mpeg"
+<audio
+    id="weddingMusic"
+    loop
+    preload="auto"
 >
 
-</audio><script>
+    <source
+        src="wedding-music.mp3"
+        type="audio/mpeg"
+    >
+
+</audio>
+
+
+
+<script>
 
 /* =========================================================
    ELEMENTS
@@ -2660,79 +2782,146 @@ let envelopeOpened = false;
 
 
 /* =========================================================
-   OPEN ENVELOPE
+   MUSIC START FUNCTION
 ========================================================= */
+
+function startWeddingMusic(){
+
+    /*
+       Calling load() ensures the audio source is
+       properly initialized on mobile browsers.
+    */
+
+    music.load();
+
+    music.volume = 1;
+
+    const playPromise =
+        music.play();
+
+    if(playPromise !== undefined){
+
+        playPromise
+        .then(function(){
+
+            musicPlaying = true;
+
+            musicButton.innerText = "❚❚";
+
+        })
+        .catch(function(error){
+
+            /*
+               If the browser temporarily rejects playback,
+               the music button can still start it.
+            */
+
+            console.log(
+                "Automatic music start was blocked:",
+                error
+            );
+
+        });
+
+    }
+
+}
+
+
+/* =========================================================
+   OPEN ENVELOPE
+   MOBILE-SAFE USER GESTURE
+========================================================= */
+
+function openEnvelope(){
+
+    if(envelopeOpened){
+        return;
+    }
+
+    envelopeOpened = true;
+
+
+    /*
+       IMPORTANT:
+       Music starts directly inside the user's
+       physical tap/pointer gesture.
+    */
+
+    startWeddingMusic();
+
+
+    envelope.classList.add("open");
+
+
+    /* Close cover */
+
+    setTimeout(
+        function(){
+
+            cover.style.transition =
+                "opacity 1s ease, transform 1s ease";
+
+            cover.style.opacity = "0";
+
+            cover.style.transform =
+                "scale(1.015)";
+
+
+            setTimeout(
+                function(){
+
+                    cover.style.display = "none";
+
+                    invitation.classList.add("show");
+
+
+                    window.scrollTo({
+                        top:0,
+                        behavior:"smooth"
+                    });
+
+                },
+                1000
+            );
+
+        },
+        1700
+    );
+
+}
+
+
+/*
+   pointerup is particularly reliable on Android
+   because it remains directly connected to the
+   user's touch gesture.
+*/
+
+envelope.addEventListener(
+    "pointerup",
+    openEnvelope,
+    {
+        once:true
+    }
+);
+
+
+/* Fallback for browsers that don't support pointer events */
 
 envelope.addEventListener(
     "click",
     function(){
 
-        if(envelopeOpened){
-            return;
+        if(!envelopeOpened){
+
+            openEnvelope();
+
         }
 
-        envelopeOpened = true;
-
-
-        envelope.classList.add("open");
-
-
-        /* Start music */
-
-        music
-            .play()
-            .then(function(){
-
-                musicPlaying = true;
-
-                musicButton.innerText = "❚❚";
-
-            })
-            .catch(function(){
-
-                /*
-                   Some mobile browsers may block
-                   audio until another interaction.
-                */
-
-            });
-
-
-        /* Close cover */
-
-        setTimeout(
-            function(){
-
-                cover.style.transition =
-                    "opacity 1s ease, transform 1s ease";
-
-                cover.style.opacity = "0";
-
-                cover.style.transform =
-                    "scale(1.015)";
-
-
-                setTimeout(
-                    function(){
-
-                        cover.style.display = "none";
-
-                        invitation.classList.add("show");
-
-
-                        window.scrollTo({
-                            top:0,
-                            behavior:"smooth"
-                        });
-
-                    },
-                    1000
-                );
-
-            },
-            1700
-        );
-
+    },
+    {
+        once:true
     }
 );
 
@@ -2781,7 +2970,8 @@ mapButton.addEventListener(
         const mapsURL =
             "https://www.google.com/maps/dir/?api=1&destination=Mithila+Watika%2C+Madhubani%2C+Bihar+847213";
 
-        window.location.href = mapsURL;
+        window.location.href =
+            mapsURL;
 
     }
 );
@@ -2874,6 +3064,7 @@ function updateCountdown(){
 
 updateCountdown();
 
+
 setInterval(
     updateCountdown,
     1000
@@ -2890,6 +3081,7 @@ const sections =
 
 const observer =
     new IntersectionObserver(
+
         function(entries){
 
             entries.forEach(
@@ -2907,10 +3099,14 @@ const observer =
             );
 
         },
+
         {
             threshold:.12,
-            rootMargin:"0px 0px -10% 0px"
+
+            rootMargin:
+                "0px 0px -10% 0px"
         }
+
     );
 
 
@@ -2933,27 +3129,31 @@ musicButton.addEventListener(
 
         if(!musicPlaying){
 
-            music
-                .play()
-                .then(
-                    function(){
+            music.load();
 
-                        musicPlaying = true;
+            music.volume = 1;
 
-                        musicButton.innerText =
-                            "❚❚";
+            music.play()
+            .then(
+                function(){
 
-                    }
-                )
-                .catch(
-                    function(){
+                    musicPlaying = true;
 
-                        console.log(
-                            "Music could not start."
-                        );
+                    musicButton.innerText =
+                        "❚❚";
 
-                    }
-                );
+                }
+            )
+            .catch(
+                function(error){
+
+                    console.log(
+                        "Music could not start:",
+                        error
+                    );
+
+                }
+            );
 
         }
         else{
@@ -2962,12 +3162,45 @@ musicButton.addEventListener(
 
             musicPlaying = false;
 
-            musicButton.innerText = "♪";
+            musicButton.innerText =
+                "♪";
 
         }
 
     }
 );
 
-</script></body>
+
+/* =========================================================
+   KEEP MUSIC STATE CORRECT
+========================================================= */
+
+music.addEventListener(
+    "play",
+    function(){
+
+        musicPlaying = true;
+
+        musicButton.innerText =
+            "❚❚";
+
+    }
+);
+
+
+music.addEventListener(
+    "pause",
+    function(){
+
+        musicPlaying = false;
+
+        musicButton.innerText =
+            "♪";
+
+    }
+);
+
+</script>
+
+</body>
 </html>
