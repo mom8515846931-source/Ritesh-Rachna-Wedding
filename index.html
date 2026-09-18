@@ -103,9 +103,6 @@ section{
     cursor:pointer;
     perspective:1000px;
 
-    /*
-       Important for mobile touch.
-    */
     touch-action:manipulation;
     -webkit-user-select:none;
     user-select:none;
@@ -315,13 +312,6 @@ section{
     text-align:center;
 
     position:relative;
-
-    /*
-       FIX:
-       Couple image moved clearly upward.
-       28% places the important part of the
-       image higher on mobile screens.
-    */
 
     background:
         url('couple.jpg')
@@ -566,12 +556,6 @@ section{
 
     position:absolute;
 
-    /*
-       FIX:
-       Raised significantly so the complete button
-       remains visible above the bottom edge.
-    */
-
     bottom:48px;
 
     left:50%;
@@ -678,12 +662,6 @@ section{
 
     text-shadow:
         0 2px 5px rgba(0,0,0,.65);
-
-    /*
-       FIX:
-       Smaller downward movement so the arrow
-       never drops below the visible area.
-    */
 
     animation:
         arrowMove
@@ -1095,11 +1073,6 @@ section{
 .section-scroll{
 
     position:absolute;
-
-    /*
-       FIX:
-       Move every section scroll button upward.
-    */
 
     bottom:48px;
 
@@ -1973,11 +1946,6 @@ section{
 
     .section-scroll{
 
-        /*
-           Keep the scroll control safely
-           inside the screen on small phones.
-        */
-
         bottom:42px;
 
         min-width:100px;
@@ -2768,11 +2736,16 @@ section{
 </button>
 
 
+<!-- =======================================================
+     WEDDING MUSIC
+======================================================= -->
+
 <audio
     id="weddingMusic"
     loop
     preload="auto"
     playsinline
+    webkit-playsinline
 >
 
     <source
@@ -2816,27 +2789,34 @@ const mapButton =
 
 
 let musicPlaying = false;
-
 let envelopeOpened = false;
+let musicStarted = false;
 
 
 /* =========================================================
-   MUSIC START FUNCTION
+   PRELOAD MUSIC
 ========================================================= */
 
 /*
+   Load the audio once when the page is ready.
+
    IMPORTANT:
-   Do NOT call music.load() here.
-
-   On some Android browsers, calling load()
-   immediately before play() can reset the media
-   element and cause the user-gesture permission
-   to be lost.
-
-   play() is therefore called directly.
+   We never call music.load() again when
+   the envelope is touched.
 */
 
+music.load();
+
+
+/* =========================================================
+   START WEDDING MUSIC
+========================================================= */
+
 function startWeddingMusic(){
+
+    if(musicStarted){
+        return;
+    }
 
     music.volume = 1;
 
@@ -2848,6 +2828,7 @@ function startWeddingMusic(){
         playPromise
         .then(function(){
 
+            musicStarted = true;
             musicPlaying = true;
 
             musicButton.innerText =
@@ -2856,18 +2837,14 @@ function startWeddingMusic(){
         })
         .catch(function(error){
 
-            /*
-               Keep the music button available
-               if the browser still refuses playback.
-            */
-
+            musicStarted = false;
             musicPlaying = false;
 
             musicButton.innerText =
                 "♪";
 
             console.log(
-                "Automatic music start was blocked:",
+                "Music playback was blocked:",
                 error
             );
 
@@ -2880,10 +2857,9 @@ function startWeddingMusic(){
 
 /* =========================================================
    OPEN ENVELOPE
-   DIRECT MOBILE TOUCH GESTURE
 ========================================================= */
 
-function openEnvelope(){
+function openEnvelope(event){
 
     if(envelopeOpened){
         return;
@@ -2893,72 +2869,169 @@ function openEnvelope(){
 
 
     /*
-       IMPORTANT:
-       This is executed directly from pointerdown,
-       which is the physical user touch.
+       =====================================================
+       MOST IMPORTANT PART FOR MOBILE
+       =====================================================
 
-       Music starts BEFORE any timeout,
-       animation or delayed action.
+       play() is called immediately from the
+       user's physical touch.
+
+       There is NO:
+       - setTimeout()
+       - await
+       - load()
+       - animation
+       - delayed function
+
+       between the touch and play().
     */
 
-    startWeddingMusic();
+    music.volume = 1;
 
+    try{
+
+        const playPromise =
+            music.play();
+
+        if(playPromise !== undefined){
+
+            playPromise
+            .then(function(){
+
+                musicStarted = true;
+                musicPlaying = true;
+
+                musicButton.innerText =
+                    "❚❚";
+
+            })
+            .catch(function(error){
+
+                musicStarted = false;
+                musicPlaying = false;
+
+                musicButton.innerText =
+                    "♪";
+
+                console.log(
+                    "Mobile browser blocked music:",
+                    error
+                );
+
+            });
+
+        }
+
+    }
+    catch(error){
+
+        console.log(
+            "Music playback error:",
+            error
+        );
+
+    }
+
+
+    /* =====================================================
+       OPEN ENVELOPE ANIMATION
+    ===================================================== */
 
     envelope.classList.add("open");
 
 
-    /* Close cover */
+    /* =====================================================
+       CLOSE COVER
+    ===================================================== */
 
-    setTimeout(
-        function(){
+    setTimeout(function(){
 
-            cover.style.transition =
-                "opacity 1s ease, transform 1s ease";
+        cover.style.transition =
+            "opacity 1s ease, transform 1s ease";
 
-            cover.style.opacity = "0";
+        cover.style.opacity = "0";
 
-            cover.style.transform =
-                "scale(1.015)";
-
-
-            setTimeout(
-                function(){
-
-                    cover.style.display = "none";
-
-                    invitation.classList.add("show");
+        cover.style.transform =
+            "scale(1.015)";
 
 
-                    window.scrollTo({
-                        top:0,
-                        behavior:"auto"
-                    });
+        setTimeout(function(){
 
-                },
-                1000
-            );
+            cover.style.display = "none";
 
-        },
-        1700
-    );
+            invitation.classList.add("show");
+
+            window.scrollTo({
+                top:0,
+                behavior:"auto"
+            });
+
+        },1000);
+
+    },1700);
 
 }
 
 
-/*
-   IMPORTANT:
-   pointerdown is used instead of pointerup/click.
+/* =========================================================
+   MOBILE TOUCH
+========================================================= */
 
-   Android treats this as the direct physical
-   touch gesture, which gives audio.play() the
-   best chance of being accepted.
+/*
+   touchstart is the primary mobile event.
+
+   This gives Android browsers the strongest
+   possible direct user-gesture signal.
+*/
+
+envelope.addEventListener(
+    "touchstart",
+    openEnvelope,
+    {
+        once:true,
+        passive:true
+    }
+);
+
+
+/*
+   Pointer-event fallback.
 */
 
 envelope.addEventListener(
     "pointerdown",
-    openEnvelope,
+    function(event){
+
+        if(!envelopeOpened){
+
+            openEnvelope(event);
+
+        }
+
+    },
     {
-        passive:true,
+        once:true,
+        passive:true
+    }
+);
+
+
+/*
+   Final click fallback.
+*/
+
+envelope.addEventListener(
+    "click",
+    function(event){
+
+        if(!envelopeOpened){
+
+            openEnvelope(event);
+
+        }
+
+    },
+    {
         once:true
     }
 );
@@ -3029,7 +3102,6 @@ function updateCountdown(){
 
     const now =
         new Date().getTime();
-
 
     const difference =
         weddingDate - now;
@@ -3163,7 +3235,10 @@ sections.forEach(
 
 musicButton.addEventListener(
     "click",
-    function(){
+    function(event){
+
+        event.stopPropagation();
+
 
         if(!musicPlaying){
 
@@ -3175,26 +3250,23 @@ musicButton.addEventListener(
             if(playPromise !== undefined){
 
                 playPromise
-                .then(
-                    function(){
+                .then(function(){
 
-                        musicPlaying = true;
+                    musicStarted = true;
+                    musicPlaying = true;
 
-                        musicButton.innerText =
-                            "❚❚";
+                    musicButton.innerText =
+                        "❚❚";
 
-                    }
-                )
-                .catch(
-                    function(error){
+                })
+                .catch(function(error){
 
-                        console.log(
-                            "Music could not start:",
-                            error
-                        );
+                    console.log(
+                        "Music could not start:",
+                        error
+                    );
 
-                    }
-                );
+                });
 
             }
 
@@ -3239,6 +3311,23 @@ music.addEventListener(
 
         musicButton.innerText =
             "♪";
+
+    }
+);
+
+
+/* =========================================================
+   AUDIO ERROR CHECK
+========================================================= */
+
+music.addEventListener(
+    "error",
+    function(){
+
+        console.log(
+            "Wedding music could not be loaded.",
+            music.error
+        );
 
     }
 );
