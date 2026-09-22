@@ -124,16 +124,40 @@ section{
     inset:0;
     overflow:hidden;
     border-radius:5px;
+    z-index:4;
 }
 
 .envelope-front::before{
     content:"";
     position:absolute;
-    width:100%;
-    height:100%;
+    inset:0;
 
     background:#e6bcc1;
 
+    /*
+       CLOSED ENVELOPE:
+       Completely covers the letter
+    */
+    clip-path:polygon(
+        0 0,
+        100% 0,
+        100% 100%,
+        0 100%
+    );
+
+    transition:
+        clip-path 1.2s
+        cubic-bezier(.65,.05,.36,1);
+}
+
+
+/*
+   AFTER OPENING:
+   Restore the normal envelope-front shape
+   so the letter can be seen.
+*/
+
+.envelope.open .envelope-front::before{
     clip-path:polygon(
         0 0,
         50% 55%,
@@ -178,7 +202,7 @@ section{
     position:absolute;
 
     width:82%;
-    height:90%;
+    height:92%;
 
     left:9%;
     top:5%;
@@ -187,10 +211,13 @@ section{
 
     z-index:3;
 
-    padding:25px 15px;
+    padding:65px 15px 20px;
+
+    text-align:center;
 
     transition:
-        transform 1.4s ease;
+        transform 1.4s
+        cubic-bezier(.22,1,.36,1);
 
     transform:translateY(0);
 
@@ -199,20 +226,34 @@ section{
         rgba(0,0,0,.12);
 }
 
+
+/* LETTER COMES OUT ONLY AFTER OPENING */
+
 .envelope.open .letter{
-    transform:translateY(-145px);
+    transform:translateY(-75px);
+    z-index:6;
 }
 
 .letter-title{
     font-family:'Great Vibes',cursive;
-    font-size:35px;
+    font-size:55px;
+    line-height:1;
     color:#8b3f50;
 }
 
 .letter-sub{
-    margin-top:10px;
-    font-size:10px;
+    margin:5px 0;
+    font-size:18px;
+    line-height:1;
     letter-spacing:2px;
+    color:#8b3f50;
+}
+
+.letter-invitation{
+    margin-top:18px;
+    font-size:11px;
+    letter-spacing:1px;
+    color:#8b3f50;
 }
 
 
@@ -479,11 +520,14 @@ section{
 
     font-weight:400;
 
-    color:#F8E8C8;
+    color:#966a11;
 
-    line-height:.9;
+    line-height:1;
 
-    margin:25px 0;
+    margin:55px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     text-shadow:
         2px 2px 0 #4A1830,
@@ -496,7 +540,15 @@ section{
 .hero h1 span{
     display:block;
 }
-
+.hero h1 .name-one{
+    margin-bottom: 35px;
+}
+.hero h1 .ampersand{
+    margin:0 0 35px;
+}
+.hero h1 .name-two{
+    margin:0;
+}
 .ampersand{
 
     font-family:'Cormorant Garamond',serif;
@@ -504,8 +556,6 @@ section{
     font-size:42px;
 
     font-style:italic;
-
-    margin:8px 0;
 
     color:#F8E8C8;
 
@@ -2528,7 +2578,10 @@ section{
             </div>
 
             <div class="letter-sub">
-                & Rachna
+                &
+            </div>
+            <div class="letter-title">
+                Rachna
             </div>
 
             <div style="margin-top:20px;font-size:11px;">
@@ -2574,7 +2627,7 @@ section{
 <section class="hero" id="hero">
 
 <div class="hero-inner">
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br>
     <div class="hero-small hero-item">
         With love & blessings
     </div>
@@ -2586,15 +2639,25 @@ section{
             Ritesh
         </span>
 
-        <div class="ampersand hero-item">
+        <span class="ampersand hero-item">
             &
-        </div>
+        </span>
 
         <span class="name-two hero-item">
             Rachna
         </span>
 
     </h1>
+
+
+    <!-- <div class="hero-date hero-item">
+        06 • 12 • 2026
+    </div>
+
+
+    <div class="hero-place hero-item">
+        SUNDAY • 7:00 PM ONWARDSx
+    </div> -->
 
 </div>
 
