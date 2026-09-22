@@ -985,492 +985,469 @@ section{
 
 
 /* =========================================================
-   EVENTS
+   EVENTS — REFERENCE PAGE-TURN ANIMATION
+   Adapted directly from the supplied reference code.
 ========================================================= */
 
 .events{
-
     width:100%;
-
-    max-width:550px;
-
+    max-width:760px;
     margin:35px auto 0;
-
+    position:relative;
     text-align:left;
 }
 
+.event-book{
+    width:100%;
+    max-width:760px;
+    height:600px;
+    margin:0 auto;
+    position:relative;
+    perspective:2500px;
+    perspective-origin:50% 50%;
+    transform-style:preserve-3d;
+    -webkit-transform-style:preserve-3d;
+}
 
-/* =========================================================
-   EVENT ROW
-========================================================= */
+/* Fixed left side of the open invitation */
+.book-left{
+    position:absolute;
+    left:0;
+    top:0;
+    width:50%;
+    height:100%;
+    background:#fffaf7;
+    border:1px solid #e5cdd0;
+    border-right:0;
+    border-radius:14px 0 0 14px;
+    box-shadow:
+        -8px 5px 20px rgba(60,30,20,.20);
+    overflow:hidden;
+    z-index:1;
+}
 
-.event{
+.book-left::before{
+    content:"";
+    position:absolute;
+    inset:18px;
+    border:1px solid rgba(152,77,90,.18);
+    border-radius:10px 0 0 10px;
+    pointer-events:none;
+}
 
-    display:block;
+.book-left-content{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:30px;
+    color:#704149;
+}
 
-    padding:22px 0;
+.book-left-ornament{
+    font-family:'Great Vibes',cursive;
+    font-size:58px;
+    color:#984d5a;
+    line-height:1;
+    margin-bottom:30px;
+}
 
-    border-bottom:
-        1px solid
-        #e5cdd0;
+.book-left-content h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:34px;
+    font-weight:600;
+    line-height:1.15;
+    color:#704149;
+}
+
+.book-left-content p{
+    margin-top:14px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:18px;
+    line-height:1.5;
+    color:#8a6269;
+}
+
+/* Central spine */
+.book-spine{
+    position:absolute;
+    left:50%;
+    top:0;
+    width:4px;
+    height:100%;
+    transform:translateX(-50%);
+    background:
+        linear-gradient(
+            to right,
+            rgba(0,0,0,.25),
+            rgba(255,255,255,.3),
+            rgba(0,0,0,.2)
+        );
+    z-index:100;
+    pointer-events:none;
+}
+
+/*
+   IMPORTANT:
+   This is the same physical page-turn mechanism as the supplied
+   reference code:
+   - right half is the active page
+   - transform origin is the left edge
+   - 0.7 second 3D rotation
+   - flipped page stays at -180deg
+*/
+.event-page{
+    position:absolute;
+    width:50%;
+    height:100%;
+    right:0;
+    top:0;
+
+    transform-origin:left center;
+    transform-style:preserve-3d;
+    -webkit-transform-style:preserve-3d;
+
+    transition:
+        transform 0.7s
+        cubic-bezier(.65,.05,.36,1);
 
     cursor:pointer;
-
-    position:relative;
-
     -webkit-tap-highlight-color:transparent;
+    will-change:transform;
+
+    z-index:20;
 }
 
-
-/* =========================================================
-   EVENT MAIN CONTENT
-========================================================= */
-
-.event-main{
-
-    display:grid;
-
-    grid-template-columns:
-        70px 1fr;
-
-    gap:20px;
-
-    align-items:center;
-
-    padding-right:30px;
-
-    transition:
-        transform .35s ease;
+/* THIS WAS MISSING FROM THE OLD EVENT IMPLEMENTATION */
+.event-page.flipped{
+    transform:rotateY(-180deg);
 }
 
-.event:active .event-main{
-    transform:scale(.985);
-}
-
-.event-date{
-
-    text-align:center;
-
-    font-family:'Cormorant Garamond',serif;
-}
-
-.event-date strong{
-
-    display:block;
-
-    font-size:28px;
-}
-
-.event-date span{
-
-    font-size:10px;
-
-    text-transform:uppercase;
-}
-
-.event h3{
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:25px;
-
-    font-weight:600;
-
-    color:#704149;
-
-    transition:
-        color .35s ease;
-}
-
-.event p{
-
-    font-size:11px;
-
-    line-height:1.7;
-
-    margin-top:5px;
-}
-
-
-/* =========================================================
-   EVENT OPEN INDICATOR
-========================================================= */
-
-.event-arrow{
-
+.event-page-front,
+.event-page-back{
     position:absolute;
-
-    right:0;
-
-    top:50%;
-
-    transform:
-        translateY(-50%);
-
-    width:25px;
-
-    height:25px;
-
-    border-radius:50%;
-
-    background:#f3dddd;
-
-    color:#984d5a;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:18px;
-
-    transition:
-        transform .4s ease,
-        background .4s ease;
-}
-
-.event.open .event-arrow{
-
-    transform:
-        translateY(-50%)
-        rotate(180deg);
-
-    background:#984d5a;
-
-    color:white;
-}
-
-.event.open h3{
-    color:#984d5a;
-}
-
-
-/* =========================================================
-   EVENT DETAIL PANEL
-========================================================= */
-
-.event-details{
-
-    max-height:0;
-
-    opacity:0;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
 
     overflow:hidden;
 
-    margin-top:0;
+    background:#fffaf7;
+    border:1px solid #e5cdd0;
 
-    transform:
-        translateY(-12px)
-        scale(.98);
-
-    transition:
-        max-height .75s cubic-bezier(.22,1,.36,1),
-        opacity .5s ease,
-        transform .65s cubic-bezier(.22,1,.36,1),
-        margin-top .65s ease;
-}
-
-.event.open .event-details{
-
-    max-height:1000px;
-
-    opacity:1;
-
-    margin-top:22px;
-
-    transform:
-        translateY(0)
-        scale(1);
-}
-
-
-/* =========================================================
-   EVENT DETAIL CARD
-========================================================= */
-
-.event-detail-inner{
-
-    background:#fffafa;
-
-    border:
-        1px solid
-        #e5cdd0;
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
 
     box-shadow:
-        0 12px 30px
-        rgba(70,30,40,.12);
-
-    overflow:hidden;
-
-    border-radius:4px;
+        8px 5px 20px rgba(60,30,20,.20);
 }
 
+.event-page-front{
+    border-radius:0 14px 14px 0;
+}
 
-/* =========================================================
-   EVENT DETAIL IMAGE
-   FIXED — FULL IMAGE VISIBLE, NO CROPPING
-========================================================= */
-
-.event-detail-image{
-
-    width:100%;
-
-    height:280px;
-
-    overflow:hidden;
-
-    background:#f1dada;
-
-    position:relative;
+.event-page-back{
+    transform:rotateY(180deg);
+    border-radius:14px 0 0 14px;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
+    text-align:center;
+
+    padding:30px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(100,50,60,.10),
+            transparent 45%
+        ),
+        #fffaf7;
+
+    box-shadow:
+        -8px 5px 20px rgba(60,30,20,.18);
 }
 
-.event-detail-image::after{
+.event-back-inner{
+    width:100%;
+    height:100%;
 
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    padding:30px;
+}
+
+.event-back-ornament{
+    font-family:'Great Vibes',cursive;
+    font-size:54px;
+    color:#984d5a;
+    margin-bottom:20px;
+}
+
+.event-back-inner h4{
+    font-family:'Cormorant Garamond',serif;
+    font-size:28px;
+    font-weight:600;
+    color:#704149;
+}
+
+.event-back-inner p{
+    margin-top:10px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:17px;
+    color:#8a6269;
+}
+
+/* Event content */
+.event-page-content{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+}
+
+.event-page-image{
+    width:100%;
+    height:245px;
+    flex-shrink:0;
+    overflow:hidden;
+    background:#f1dada;
+    position:relative;
+}
+
+.event-page-image::after{
     content:"";
-
     position:absolute;
-
     inset:0;
-
     background:
         linear-gradient(
             to bottom,
             transparent 55%,
             rgba(60,20,35,.10)
         );
-
     pointer-events:none;
-
-    z-index:2;
 }
 
-.event-detail-image img{
-
+.event-page-image img{
     width:100%;
-
     height:100%;
-
-    /*object-fit:contain;*/
-
-    object-position:center center;
-
+    object-fit:cover;
+    object-position:center;
     display:block;
-
-    transform:scale(1);
-
-    transition:
-        transform 1.2s
-        cubic-bezier(.22,1,.36,1);
 }
 
-.event.open .event-detail-image img{
-
-    transform:scale(1.02);
-}
-
-
-/* =========================================================
-   EVENT DETAIL CONTENT
-========================================================= */
-
-.event-detail-content{
-
-    padding:
-        22px 20px 24px;
-
+.event-page-info{
+    padding:22px 24px 25px;
     text-align:left;
+    overflow-y:auto;
+    flex:1;
 }
 
-.event-detail-label{
-
-    font-size:9px;
-
+.event-page-label{
+    font-size:8px;
     letter-spacing:2.5px;
-
     text-transform:uppercase;
-
     color:#a16a72;
-
-    margin-bottom:6px;
+    margin-bottom:5px;
 }
 
-.event-detail-content h4{
-
+.event-page-title{
     font-family:'Great Vibes',cursive;
-
-    font-size:38px;
-
-    line-height:1.1;
-
+    font-size:39px;
+    line-height:1.05;
     font-weight:400;
-
     color:#984d5a;
-
-    margin-bottom:13px;
+    margin-bottom:10px;
 }
 
-.event-detail-info{
-
+.event-page-meta{
     display:flex;
-
     flex-direction:column;
-
-    gap:8px;
-
-    margin-bottom:15px;
+    gap:5px;
+    margin-bottom:10px;
 }
 
-.event-detail-info div{
-
-    font-size:11px;
-
-    line-height:1.6;
-
+.event-page-meta div{
+    font-size:9.5px;
+    line-height:1.45;
     color:#6e4148;
 }
 
-.event-detail-info strong{
-
+.event-page-meta strong{
     color:#874450;
-
     font-weight:600;
 }
 
-.event-description{
-
+.event-page-description{
     font-family:'Cormorant Garamond',serif;
-
-    font-size:19px;
-
-    line-height:1.55;
-
+    font-size:16px;
+    line-height:1.42;
     color:#704149;
-
-    margin-top:10px;
+    margin-top:8px;
 }
 
-
-/* =========================================================
-   EVENT MAP BUTTON
-========================================================= */
-
-.event-map-button{
-
+.event-page-map{
     display:inline-block;
-
-    margin-top:18px;
-
-    padding:
-        10px 18px;
-
+    margin-top:12px;
+    padding:8px 15px;
     background:#984d5a;
-
-    color:white;
-
+    color:#fff;
     text-decoration:none;
-
-    font-size:9px;
-
-    letter-spacing:1.5px;
-
+    font-size:8px;
+    letter-spacing:1.3px;
     text-transform:uppercase;
-
-    border-radius:25px;
-
-    box-shadow:
-        0 5px 15px
-        rgba(70,30,40,.15);
-
-    transition:
-        transform .25s ease,
-        background .25s ease;
+    border-radius:22px;
+    box-shadow:0 5px 15px rgba(70,30,40,.15);
+    position:relative;
+    z-index:60;
 }
 
-.event-map-button:active{
-
+.event-page-map:active{
     transform:scale(.96);
 }
 
-.event-map-button:hover{
-
-    background:#874450;
+.event-page-number{
+    position:absolute;
+    right:16px;
+    bottom:12px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:12px;
+    color:#a16a72;
 }
 
-
-/* =========================================================
-   EVENT REVEAL ANIMATION
-========================================================= */
-
-.events .event{
-
-    opacity:0;
-
-    transform:
-        translateY(25px)
-        scale(.99);
-
-    filter:blur(4px);
+.event-book-controls{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    margin-top:25px;
 }
 
-.fade.visible .events .event{
-
-    animation:
-        eventReveal
-        1.25s
-        cubic-bezier(.22,1,.36,1)
-        forwards;
+.event-book-button{
+    min-width:120px;
+    border:0;
+    border-radius:30px;
+    padding:12px 20px;
+    background:#704149;
+    color:#fff8f2;
+    font-family:'Montserrat',sans-serif;
+    font-size:10px;
+    letter-spacing:1.2px;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(70,30,40,.18);
+    transition:transform .25s ease,opacity .25s ease;
 }
 
-.fade.visible .events .event:nth-child(1){
-    animation-delay:3.0s;
+.event-book-button:active{
+    transform:scale(.95);
 }
 
-.fade.visible .events .event:nth-child(2){
-    animation-delay:3.8s;
+.event-book-button:disabled{
+    opacity:.35;
+    cursor:default;
 }
 
-.fade.visible .events .event:nth-child(3){
-    animation-delay:4.6s;
+.event-book-counter{
+    margin-top:10px;
+    text-align:center;
+    font-size:9px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#9b686e;
 }
 
-.fade.visible .events .event:nth-child(4){
-    animation-delay:5.4s;
+.events .event-book{
+    opacity:1;
+    transform:none;
+    filter:none;
 }
 
-.fade.visible .events .event:nth-child(5){
-    animation-delay:6.2s;
-}
+@media(max-width:600px){
 
-@keyframes eventReveal{
-
-    0%{
-        opacity:0;
-
-        transform:
-            translateY(25px)
-            scale(.99);
-
-        filter:blur(4px);
+    .event-book{
+        height:590px;
+        perspective:2200px;
     }
 
-    100%{
-        opacity:1;
-
-        transform:
-            translateY(0)
-            scale(1);
-
-        filter:blur(0);
+    .book-left-content{
+        padding:20px;
     }
 
+    .book-left-ornament{
+        font-size:45px;
+        margin-bottom:20px;
+    }
+
+    .book-left-content h3{
+        font-size:25px;
+    }
+
+    .book-left-content p{
+        font-size:14px;
+    }
+
+    .event-page-image{
+        height:215px;
+    }
+
+    .event-page-info{
+        padding:17px 17px 23px;
+    }
+
+    .event-page-title{
+        font-size:34px;
+    }
+
+    .event-page-description{
+        font-size:15px;
+    }
+
+    .event-page-meta div{
+        font-size:8.5px;
+    }
+
+    .event-book-button{
+        min-width:105px;
+        padding:11px 14px;
+    }
 }
+
+@media(max-width:430px){
+
+    .event-book{
+        height:550px;
+    }
+
+    .event-page-image{
+        height:185px;
+    }
+
+    .event-page-title{
+        font-size:29px;
+    }
+
+    .event-page-description{
+        font-size:14px;
+    }
+
+    .book-left-content h3{
+        font-size:22px;
+    }
+
+    .book-left-content p{
+        font-size:12px;
+    }
+}
+
 
 
 /* =========================================================
@@ -3010,469 +2987,376 @@ section{
     Celebrations
 </div>
 
-
 <div class="section-title">
     Wedding Events
 </div>
 
-
 <div class="divider"></div>
-
 
 <div class="events">
 
+    <div class="event-book" id="eventBook">
 
-    <!-- ===================================================
-         KUMRAM BHOJ
-    ==================================================== -->
+        <div class="book-left">
+            <div class="book-left-content">
+                <div class="book-left-ornament">❦</div>
+                <h3>Forever<br>Together</h3>
+                <p>One journey. One love.</p>
+            </div>
+        </div>
 
-    <div class="event" data-event="kumram-bhoj">
+        <div class="book-spine"></div>
 
-        <div class="event-main">
 
-            <div class="event-date">
+        <div class="event-page" data-event-index="0">
 
-                <strong>
+            <div class="event-page-front">
+
+                <div class="event-page-content">
+
+                    <div class="event-page-image">
+                        <img src="kumram-bhoj.jpeg" alt="Kumram Bhoj">
+                    </div>
+
+                    <div class="event-page-info">
+
+                        <div class="event-page-label">
+                            First Celebration
+                        </div>
+
+                        <div class="event-page-title">
+                            Kumram Bhoj
+                        </div>
+
+                        <div class="event-page-meta">
+
+                            <div>
+                                📅 <strong>Date:</strong> Thursday, 3 December 2026
+                            </div>
+
+                            <div>
+                                🕒 <strong>Time:</strong> 7:00 PM onwards
+                            </div>
+
+                            <div>
+                                📍 <strong>Venue:</strong> BSNL, Madhubani, Bihar 847211
+                            </div>
+
+                        </div>
+
+                        <div class="event-page-description">
+                            An evening filled with delicious food, family, laughter and blessings as we begin the wedding celebrations together. We would be delighted to have you join us for this special gathering.
+                        </div>
+
+                        <a
+                            href="https://maps.app.goo.gl/ToKp5uxsfBpMevWE6"
+                            class="event-page-map"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            📍 View Location
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="event-page-number">
+                    01
+                </div>
+
+            </div>
+
+            <div class="event-page-back">
+
+                <div class="event-back-inner">
+                    <!-- <div class="event-back-ornament">R &amp; R</div> -->
+                    <h4>Ritesh &amp; Rachna</h4>
+                    <p>With love and blessings</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="event-page" data-event-index="1">
+
+            <div class="event-page-front">
+
+                <div class="event-page-content">
+
+                    <div class="event-page-image">
+                        <img src="haldi.jpeg" alt="Haldi">
+                    </div>
+
+                    <div class="event-page-info">
+
+                        <div class="event-page-label">
+                            A Golden Celebration
+                        </div>
+
+                        <div class="event-page-title">
+                            Haldi
+                        </div>
+
+                        <div class="event-page-meta">
+
+                            <div>
+                                📅 <strong>Date:</strong> Friday, 4 December 2026
+                            </div>
+
+                            <div>
+                                🕒 <strong>Time:</strong> 12:00 PM
+                            </div>
+
+                            <div>
+                                📍 <strong>Venue:</strong> BSNL, Madhubani, Bihar 847211
+                            </div>
+
+                        </div>
+
+                        <div class="event-page-description">
+                            Come celebrate the joyful Haldi ceremony with us as family and friends gather to fill the day with happiness, blessings, music and beautiful memories.
+                        </div>
+
+                        <a
+                            href="https://maps.app.goo.gl/ToKp5uxsfBpMevWE6"
+                            class="event-page-map"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            📍 View Location
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="event-page-number">
+                    02
+                </div>
+
+            </div>
+
+            <div class="event-page-back">
+
+                <div class="event-back-inner">
+                    <!-- <div class="event-back-ornament">R &amp; R</div> -->
+                    <h4>Ritesh &amp; Rachna</h4>
+                    <p>With love and blessings</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="event-page" data-event-index="2">
+
+            <div class="event-page-front">
+
+                <div class="event-page-content">
+
+                    <div class="event-page-image">
+                        <img src="mehndi.jpeg" alt="Mehndi">
+                    </div>
+
+                    <div class="event-page-info">
+
+                        <div class="event-page-label">
+                            An Evening of Joy
+                        </div>
+
+                        <div class="event-page-title">
+                            Mehndi
+                        </div>
+
+                        <div class="event-page-meta">
+
+                            <div>
+                                📅 <strong>Date:</strong> Friday, 4 December 2026
+                            </div>
+
+                            <div>
+                                🕒 <strong>Time:</strong> 6:00 PM
+                            </div>
+
+                            <div>
+                                📍 <strong>Venue:</strong> BSNL, Madhubani, Bihar 847211
+                            </div>
+
+                        </div>
+
+                        <div class="event-page-description">
+                            Join us for a beautiful evening of Mehndi, music and celebration. Your presence will make this colorful occasion even more memorable for both of us.
+                        </div>
+
+                        <a
+                            href="https://maps.app.goo.gl/ToKp5uxsfBpMevWE6"
+                            class="event-page-map"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            📍 View Location
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="event-page-number">
                     03
-                </strong>
-
-                <span>
-                    Dec
-                </span>
-
-            </div>
-
-
-            <div>
-
-                <h3>
-                    Kumram Bhoj
-                </h3>
-
-                <p>
-                    Thursday • 7:00 PM onwards
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="event-arrow">
-            ⌄
-        </div>
-
-
-        <div class="event-details">
-
-            <div class="event-detail-inner">
-
-                <div class="event-detail-image">
-
-                    <img
-                        src="kumram-bhoj.jpeg"
-                        alt="Kumram Bhoj"
-                    >
-
                 </div>
 
+            </div>
 
-                <div class="event-detail-content">
+            <div class="event-page-back">
 
-                    <div class="event-detail-label">
-                        First Celebration
-                    </div>
-
-                    <h4>
-                        Kumram Bhoj
-                    </h4>
-
-
-                    <div class="event-detail-info">
-
-                        <div>
-                            📅 <strong>Date:</strong>
-                            Thursday, 3 December 2026
-                        </div>
-
-                        <div>
-                            🕖 <strong>Time:</strong>
-                            7:00 PM onwards
-                        </div>
-
-                        <div>
-                            📍 <strong>Venue:</strong>
-                            Mithila Watika, Madhubani
-                        </div>
-
-                    </div>
-
-
-                    <div class="event-description">
-
-                        An evening filled with delicious food,
-                        family, laughter and blessings as we
-                        begin the wedding celebrations together.
-                        We would be delighted to have you join us
-                        for this special gathering.
-
-                    </div>
-
-
-                    <a
-                        href="https://www.google.com/maps/dir/?api=1&destination=Mithila+Watika%2C+Madhubani%2C+Bihar+847213"
-                        class="event-map-button"
-                        target="_blank"
-                        rel="noopener"
-                    >
-                        📍 View Location
-                    </a>
-
+                <div class="event-back-inner">
+                    <!-- <div class="event-back-ornament">R &amp; R</div> -->
+                    <h4>Ritesh &amp; Rachna</h4>
+                    <p>With love and blessings</p>
                 </div>
 
             </div>
 
         </div>
 
-    </div>
+        <div class="event-page" data-event-index="3">
 
+            <div class="event-page-front">
 
+                <div class="event-page-content">
 
-    <!-- ===================================================
-         HALDI
-    ==================================================== -->
+                    <div class="event-page-image">
+                        <img src="kumram.jpeg" alt="Kumram">
+                    </div>
 
-    <div class="event" data-event="haldi">
+                    <div class="event-page-info">
 
-        <div class="event-main">
+                        <div class="event-page-label">
+                            Before the Big Day
+                        </div>
 
-            <div class="event-date">
+                        <div class="event-page-title">
+                            Kumram
+                        </div>
 
-                <strong>
+                        <div class="event-page-meta">
+
+                            <div>
+                                📅 <strong>Date:</strong> Saturday, 5 December 2026
+                            </div>
+
+                            <div>
+                                🕒 <strong>Time:</strong> 6:00 PM
+                            </div>
+
+                            <div>
+                                📍 <strong>Venue:</strong> BSNL, Madhubani, Bihar 847211
+                            </div>
+
+                        </div>
+
+                        <div class="event-page-description">
+                            As we come closer to our wedding day, we invite you to share another beautiful celebration with our families and loved ones. Your blessings mean the world to us.
+                        </div>
+
+                        <a
+                            href="https://maps.app.goo.gl/ToKp5uxsfBpMevWE6"
+                            class="event-page-map"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            📍 View Location
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="event-page-number">
                     04
-                </strong>
-
-                <span>
-                    Dec
-                </span>
-
-            </div>
-
-
-            <div>
-
-                <h3>
-                    Haldi
-                </h3>
-
-                <p>
-                    Friday • 12:00 PM
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="event-arrow">
-            ⌄
-        </div>
-
-
-        <div class="event-details">
-
-            <div class="event-detail-inner">
-
-                <div class="event-detail-image">
-
-                    <img
-                        src="haldi.jpeg"
-                        alt="Haldi Ceremony"
-                    >
-
                 </div>
 
+            </div>
 
-                <div class="event-detail-content">
+            <div class="event-page-back">
 
-                    <div class="event-detail-label">
-                        A Golden Celebration
-                    </div>
-
-                    <h4>
-                        Haldi
-                    </h4>
-
-
-                    <div class="event-detail-info">
-
-                        <div>
-                            📅 <strong>Date:</strong>
-                            Friday, 4 December 2026
-                        </div>
-
-                        <div>
-                            🕛 <strong>Time:</strong>
-                            12:00 PM
-                        </div>
-
-                        <div>
-                            📍 <strong>Venue:</strong>
-                            Mithila Watika, Madhubani
-                        </div>
-
-                    </div>
-
-
-                    <div class="event-description">
-
-                        Come celebrate the joyful Haldi ceremony
-                        with us as family and friends gather to
-                        fill the day with happiness, blessings,
-                        music and beautiful memories.
-
-                    </div>
-
-
-                    <a
-                        href="https://www.google.com/maps/dir/?api=1&destination=Mithila+Watika%2C+Madhubani%2C+Bihar+847213"
-                        class="event-map-button"
-                        target="_blank"
-                        rel="noopener"
-                    >
-                        📍 View Location
-                    </a>
-
+                <div class="event-back-inner">
+                    <!-- <div class="event-back-ornament">R &amp; R</div> -->
+                    <h4>Ritesh &amp; Rachna</h4>
+                    <p>With love and blessings</p>
                 </div>
 
             </div>
 
         </div>
 
-    </div>
+        <div class="event-page" data-event-index="4">
 
+            <div class="event-page-front">
 
+                <div class="event-page-content">
 
-    <!-- ===================================================
-         MEHNDI
-    ==================================================== -->
+                    <div class="event-page-image">
+                        <img src="wedding.jpeg" alt="Wedding Ceremony">
+                    </div>
 
-    <div class="event" data-event="mehndi">
+                    <div class="event-page-info">
 
-        <div class="event-main">
+                        <div class="event-page-label">
+                            The Main Celebration
+                        </div>
 
-            <div class="event-date">
+                        <div class="event-page-title">
+                            Wedding Ceremony
+                        </div>
 
-                <strong>
-                    04
-                </strong>
+                        <div class="event-page-meta">
 
-                <span>
-                    Dec
-                </span>
+                            <div>
+                                📅 <strong>Date:</strong> Sunday, 6 December 2026
+                            </div>
 
-            </div>
+                            <div>
+                                🕒 <strong>Time:</strong> 7:00 PM onwards
+                            </div>
 
+                            <div>
+                                📍 <strong>Venue:</strong> Mithila Watika, Madhubani
+                            </div>
 
-            <div>
+                        </div>
 
-                <h3>
-                    Mehndi
-                </h3>
+                        <div class="event-page-description">
+                            The day we have been waiting for is finally here. Please join Ritesh and Rachna as we begin our forever together. Your presence, love and blessings will make our wedding celebration truly unforgettable.
+                        </div>
 
-                <p>
-                    Friday • 6:00 PM
-                </p>
+                        <a
+                            href="https://www.google.com/maps/dir/?api=1&destination=Mithila+Watika%2C+Madhubani%2C+Bihar+847213"
+                            class="event-page-map"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            📍 View Location
+                        </a>
 
-            </div>
-
-        </div>
-
-
-        <div class="event-arrow">
-            ⌄
-        </div>
-
-
-        <div class="event-details">
-
-            <div class="event-detail-inner">
-
-                <div class="event-detail-image">
-
-                    <img
-                        src="mehndi.jpeg"
-                        alt="Mehndi Ceremony"
-                    >
+                    </div>
 
                 </div>
 
-
-                <div class="event-detail-content">
-
-                    <div class="event-detail-label">
-                        An Evening of Joy
-                    </div>
-
-                    <h4>
-                        Mehndi
-                    </h4>
-
-
-                    <div class="event-detail-info">
-
-                        <div>
-                            📅 <strong>Date:</strong>
-                            Friday, 4 December 2026
-                        </div>
-
-                        <div>
-                            🕕 <strong>Time:</strong>
-                            6:00 PM
-                        </div>
-
-                        <div>
-                            📍 <strong>Venue:</strong>
-                            Mithila Watika, Madhubani
-                        </div>
-
-                    </div>
-
-
-                    <div class="event-description">
-
-                        Join us for a beautiful evening of Mehndi,
-                        music and celebration. Your presence will
-                        make this colorful occasion even more
-                        memorable for both of us.
-
-                    </div>
-
-
-                    <a
-                        href="https://www.google.com/maps/dir/?api=1&destination=Mithila+Watika%2C+Madhubani%2C+Bihar+847213"
-                        class="event-map-button"
-                        target="_blank"
-                        rel="noopener"
-                    >
-                        📍 View Location
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- ===================================================
-         KUMRAM
-    ==================================================== -->
-
-    <div class="event" data-event="kumram">
-
-        <div class="event-main">
-
-            <div class="event-date">
-
-                <strong>
+                <div class="event-page-number">
                     05
-                </strong>
-
-                <span>
-                    Dec
-                </span>
-
-            </div>
-
-
-            <div>
-
-                <h3>
-                    Kumram
-                </h3>
-
-                <p>
-                    Saturday • 6:00 PM
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="event-arrow">
-            ⌄
-        </div>
-
-
-        <div class="event-details">
-
-            <div class="event-detail-inner">
-
-                <div class="event-detail-image">
-
-                    <img
-                        src="kumram.jpeg"
-                        alt="Kumram Ceremony"
-                    >
-
                 </div>
 
+            </div>
 
-                <div class="event-detail-content">
+            <div class="event-page-back">
 
-                    <div class="event-detail-label">
-                        Before the Big Day
-                    </div>
-
-                    <h4>
-                        Kumram
-                    </h4>
-
-
-                    <div class="event-detail-info">
-
-                        <div>
-                            📅 <strong>Date:</strong>
-                            Saturday, 5 December 2026
-                        </div>
-
-                        <div>
-                            🕕 <strong>Time:</strong>
-                            6:00 PM
-                        </div>
-
-                        <div>
-                            📍 <strong>Venue:</strong>
-                            Mithila Watika, Madhubani
-                        </div>
-
-                    </div>
-
-
-                    <div class="event-description">
-
-                        As we come closer to our wedding day,
-                        we invite you to share another beautiful
-                        celebration with our families and loved
-                        ones. Your blessings mean the world to us.
-
-                    </div>
-
-
-                    <a
-                        href="https://www.google.com/maps/dir/?api=1&destination=Mithila+Watika%2C+Madhubani%2C+Bihar+847213"
-                        class="event-map-button"
-                        target="_blank"
-                        rel="noopener"
-                    >
-                        📍 View Location
-                    </a>
-
+                <div class="event-back-inner">
+                    <!-- <div class="event-back-ornament">R &amp; R</div> -->
+                    <h4>Ritesh &amp; Rachna</h4>
+                    <p>With love and blessings</p>
                 </div>
 
             </div>
@@ -3481,125 +3365,31 @@ section{
 
     </div>
 
+    <div class="event-book-controls">
 
+        <button
+            class="event-book-button"
+            id="eventPrev"
+            type="button"
+        >
+            ← Previous
+        </button>
 
-    <!-- ===================================================
-         WEDDING CEREMONY
-    ==================================================== -->
-
-    <div class="event" data-event="wedding">
-
-        <div class="event-main">
-
-            <div class="event-date">
-
-                <strong>
-                    06
-                </strong>
-
-                <span>
-                    Dec
-                </span>
-
-            </div>
-
-
-            <div>
-
-                <h3>
-                    Wedding Ceremony
-                </h3>
-
-                <p>
-                    Sunday • 7:00 PM onwards
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="event-arrow">
-            ⌄
-        </div>
-
-
-        <div class="event-details">
-
-            <div class="event-detail-inner">
-
-                <div class="event-detail-image">
-
-                    <img
-                        src="wedding.jpeg"
-                        alt="Wedding Ceremony"
-                    >
-
-                </div>
-
-
-                <div class="event-detail-content">
-
-                    <div class="event-detail-label">
-                        The Main Celebration
-                    </div>
-
-                    <h4>
-                        Wedding Ceremony
-                    </h4>
-
-
-                    <div class="event-detail-info">
-
-                        <div>
-                            📅 <strong>Date:</strong>
-                            Sunday, 6 December 2026
-                        </div>
-
-                        <div>
-                            🕖 <strong>Time:</strong>
-                            7:00 PM onwards
-                        </div>
-
-                        <div>
-                            📍 <strong>Venue:</strong>
-                            Mithila Watika, Madhubani
-                        </div>
-
-                    </div>
-
-
-                    <div class="event-description">
-
-                        The day we have been waiting for is finally
-                        here. Please join Ritesh and Rachna as we
-                        begin our forever together. Your presence,
-                        love and blessings will make our wedding
-                        celebration truly unforgettable.
-
-                    </div>
-
-
-                    <a
-                        href="https://www.google.com/maps/dir/?api=1&destination=Mithila+Watika%2C+Madhubani%2C+Bihar+847213"
-                        class="event-map-button"
-                        target="_blank"
-                        rel="noopener"
-                    >
-                        📍 View Location
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
+        <button
+            class="event-book-button"
+            id="eventNext"
+            type="button"
+        >
+            Next →
+        </button>
 
     </div>
 
+    <div class="event-book-counter" id="eventCounter">
+        Event 01 of 05
+    </div>
 
 </div>
-
 
 <a href="#venue" class="section-scroll">
 
@@ -3614,8 +3404,6 @@ section{
 </a>
 
 </section>
-
-
 
 <!-- =======================================================
      VENUE
@@ -4144,107 +3932,271 @@ if(photoSlider){
 
 
 /* =========================================================
-   EVENT DETAILS
+   EVENT BOOK — REFERENCE 3D PAGE TURN
+   Uses the exact interaction model of the supplied reference code.
 ========================================================= */
 
-const events =
-    document.querySelectorAll(".event");
+const eventPages =
+    document.querySelectorAll(".event-page");
+
+const eventNext =
+    document.getElementById("eventNext");
+
+const eventPrev =
+    document.getElementById("eventPrev");
+
+const eventCounter =
+    document.getElementById("eventCounter");
+
+const eventBook =
+    document.getElementById("eventBook");
+
+let currentEventPage = 0;
+let eventBookBusy = false;
+
+const EVENT_PAGE_TURN_TIME = 700;
 
 
-events.forEach(
-    function(eventElement){
+/* =========================================================
+   STACK ORDER
+========================================================= */
 
-        eventElement.addEventListener(
+function setEventStack(){
+
+    eventPages.forEach(
+        function(page,index){
+
+            if(index < currentEventPage){
+
+                page.classList.add("flipped");
+
+                /* Keep turned pages behind the newest left page. */
+                page.style.zIndex =
+                    String(index + 10);
+
+            }
+
+            else{
+
+                page.classList.remove("flipped");
+
+                /* Unturned pages stack on the right. */
+                page.style.zIndex =
+                    String(100 - index);
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   CONTROLS
+========================================================= */
+
+function updateEventControls(){
+
+    if(eventPrev){
+
+        eventPrev.disabled =
+            currentEventPage === 0;
+
+    }
+
+    if(eventNext){
+
+        eventNext.disabled =
+            currentEventPage === eventPages.length;
+
+    }
+
+    if(eventCounter){
+
+        const visibleEvent =
+            Math.min(
+                currentEventPage + 1,
+                eventPages.length
+            );
+
+        eventCounter.innerText =
+            "Event " +
+            String(visibleEvent).padStart(2,"0") +
+            " of " +
+            String(eventPages.length).padStart(2,"0");
+
+    }
+
+}
+
+
+/* =========================================================
+   NEXT PAGE
+   Same class-based mechanism as the supplied reference.
+========================================================= */
+
+function nextEventPage(){
+
+    if(
+        eventBookBusy ||
+        currentEventPage >= eventPages.length
+    ){
+        return;
+    }
+
+    const page =
+        eventPages[currentEventPage];
+
+    if(!page){
+        return;
+    }
+
+    eventBookBusy = true;
+
+    page.style.zIndex = "1000";
+
+    /*
+       Force the browser to register the current transform
+       before adding the flipped class.
+    */
+    void page.offsetWidth;
+
+    page.classList.add("flipped");
+
+    currentEventPage++;
+
+    updateEventControls();
+
+    window.setTimeout(
+        function(){
+
+            setEventStack();
+
+            eventBookBusy = false;
+
+        },
+        EVENT_PAGE_TURN_TIME + 40
+    );
+
+}
+
+
+/* =========================================================
+   PREVIOUS PAGE
+========================================================= */
+
+function previousEventPage(){
+
+    if(
+        eventBookBusy ||
+        currentEventPage <= 0
+    ){
+        return;
+    }
+
+    const page =
+        eventPages[currentEventPage - 1];
+
+    if(!page){
+        return;
+    }
+
+    eventBookBusy = true;
+
+    page.style.zIndex = "1000";
+
+    void page.offsetWidth;
+
+    page.classList.remove("flipped");
+
+    currentEventPage--;
+
+    updateEventControls();
+
+    window.setTimeout(
+        function(){
+
+            setEventStack();
+
+            eventBookBusy = false;
+
+        },
+        EVENT_PAGE_TURN_TIME + 40
+    );
+
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+if(eventNext){
+
+    eventNext.addEventListener(
+        "click",
+        function(event){
+
+            event.stopPropagation();
+
+            nextEventPage();
+
+        }
+    );
+
+}
+
+if(eventPrev){
+
+    eventPrev.addEventListener(
+        "click",
+        function(event){
+
+            event.stopPropagation();
+
+            previousEventPage();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   CLICK TO TURN
+========================================================= */
+
+eventPages.forEach(
+    function(page,index){
+
+        page.addEventListener(
             "click",
             function(event){
 
                 /*
-                   Don't open/close the event when
-                   the location button is pressed.
+                   Do not turn the page when the Google Maps
+                   button itself is pressed.
                 */
-
                 if(
                     event.target.closest(
-                        ".event-map-button"
+                        ".event-page-map"
                     )
                 ){
-
                     return;
+                }
+
+                if(index === currentEventPage){
+
+                    nextEventPage();
 
                 }
 
+                else if(
+                    index === currentEventPage - 1
+                ){
 
-                const isAlreadyOpen =
-                    eventElement.classList.contains("open");
-
-
-                /*
-                   Close every other event.
-                */
-
-                events.forEach(
-                    function(otherEvent){
-
-                        if(
-                            otherEvent !==
-                            eventElement
-                        ){
-
-                            otherEvent.classList.remove(
-                                "open"
-                            );
-
-                        }
-
-                    }
-                );
-
-
-                /*
-                   Toggle the selected event.
-                */
-
-                if(isAlreadyOpen){
-
-                    eventElement.classList.remove(
-                        "open"
-                    );
-
-                }
-                else{
-
-                    eventElement.classList.add(
-                        "open"
-                    );
-
-
-                    /*
-                       Give the browser a moment to
-                       start the opening animation,
-                       then bring the complete event
-                       card into view.
-                    */
-
-                    setTimeout(
-                        function(){
-
-                            const detail =
-                                eventElement.querySelector(
-                                    ".event-details"
-                                );
-
-                            if(detail){
-
-                                detail.scrollIntoView({
-                                    behavior:"smooth",
-                                    block:"nearest"
-                                });
-
-                            }
-
-                        },
-                        150
-                    );
+                    previousEventPage();
 
                 }
 
@@ -4253,6 +4205,94 @@ events.forEach(
 
     }
 );
+
+
+/* =========================================================
+   MOBILE SWIPE
+========================================================= */
+
+let eventTouchStartX = 0;
+let eventTouchStartY = 0;
+
+if(eventBook){
+
+    eventBook.addEventListener(
+        "touchstart",
+        function(event){
+
+            if(event.touches.length !== 1){
+                return;
+            }
+
+            eventTouchStartX =
+                event.changedTouches[0].screenX;
+
+            eventTouchStartY =
+                event.changedTouches[0].screenY;
+
+        },
+        {passive:true}
+    );
+
+
+    eventBook.addEventListener(
+        "touchend",
+        function(event){
+
+            const endX =
+                event.changedTouches[0].screenX;
+
+            const endY =
+                event.changedTouches[0].screenY;
+
+            const distance =
+                endX - eventTouchStartX;
+
+            const verticalDistance =
+                endY - eventTouchStartY;
+
+
+            /*
+               Ignore mostly vertical gestures because the
+               invitation itself is vertically scrollable.
+            */
+            if(
+                Math.abs(distance) < 50 ||
+                Math.abs(distance) < Math.abs(verticalDistance)
+            ){
+                return;
+            }
+
+
+            /* Swipe left → next page */
+            if(distance < -50){
+
+                nextEventPage();
+
+            }
+
+
+            /* Swipe right → previous page */
+            else if(distance > 50){
+
+                previousEventPage();
+
+            }
+
+        },
+        {passive:true}
+    );
+
+}
+
+
+/* =========================================================
+   INITIAL EVENT BOOK STATE
+========================================================= */
+
+setEventStack();
+updateEventControls();
+
 
 
 /* =========================================================
