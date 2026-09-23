@@ -348,7 +348,7 @@ section{
     background:
         url('couple.jpg')
         center center/
-        cover no-repeat;
+        contain no-repeat;
 
     background-size:contain;
     background-position:center center;
@@ -419,21 +419,17 @@ section{
 ========================================================= */
 
 .hero-inner{
-
-    position:relative;
-
+    position:absolute;
+    top:65%;
+    left:50%;
     z-index:2;
-
     width:100%;
     max-width:900px;
-
     display:flex;
     flex-direction:column;
-
     align-items:center;
     justify-content:center;
-
-    transform:translateY(-8px);
+    transform:translate(-50%, -50%);
 }
 
 
@@ -527,11 +523,11 @@ section{
 
     text-transform:uppercase;
 
-    color:#fff8e7;
+    color:#5A1F2B;
 
     text-shadow:
-        1px 1px 3px #3A1729,
-        0 2px 7px rgba(0,0,0,.75);
+        1px 1px 3px rgba(255,255,255,.8),
+        0 2px 5px rgba(0,0,0,.25);
 }
 
 .hero h1{
@@ -539,7 +535,7 @@ section{
     font-family:'Great Vibes',cursive;
 
     font-size:
-        clamp(65px,18vw,110px);
+        clamp(50px,13vw,78px);
 
     font-weight:400;
 
@@ -547,7 +543,7 @@ section{
 
     line-height:1;
 
-    margin:55px 0;
+    margin:25px 0;
 
     display:flex;
     flex-direction:column;
@@ -566,11 +562,11 @@ section{
 }
 
 .hero h1 .name-one{
-    margin-bottom:35px;
+    margin-bottom:15px;
 }
 
 .hero h1 .ampersand{
-    margin:0 0 35px;
+    margin:0 0 15px;
 }
 
 .hero h1 .name-two{
@@ -778,7 +774,9 @@ section{
     }
 
     .hero-inner{
-        transform:translateY(-5px);
+        transform:translate(-50%, -5px);
+        width:calc(100% - 36px);
+        left:50%;
     }
 
     .hero-small{
@@ -2440,6 +2438,345 @@ section{
 }
 
 
+
+/* =========================================================
+   MOBILE — TARGETED FIT FOR PHOTO / EVENTS / VENUE
+   These rules do not modify the opening hero page.
+========================================================= */
+
+@media(max-width:699px){
+
+    /* -----------------------------------------
+       ONE BEAUTIFUL JOURNEY
+       ----------------------------------------- */
+
+    #photo{
+        height:100svh;
+        min-height:100svh;
+        max-height:100svh;
+        box-sizing:border-box;
+        overflow:hidden;
+        padding:58px 12px 82px;
+    }
+
+    #photo .section-sub{
+        margin-top:0;
+        font-size:10px;
+        letter-spacing:3px;
+    }
+
+    #photo .section-title{
+        font-size:40px;
+        line-height:1;
+        white-space:nowrap;
+        margin-top:2px;
+    }
+
+    #photo .divider{
+        margin:14px auto 14px;
+    }
+
+    #photo .photo-frame{
+        width:100%;
+        max-width:300px;
+        margin:0 auto;
+        padding:6px;
+        box-sizing:border-box;
+    }
+
+    #photo .photo-slider{
+        height:270px;
+    }
+
+    #photo .photo-dots{
+        margin-top:7px;
+    }
+
+    #photo > .section-scroll{
+        bottom:18px;
+    }
+
+
+    /* -----------------------------------------
+       WEDDING EVENTS
+       Smaller book + tighter spacing so the
+       entire book and controls fit one screen.
+       ----------------------------------------- */
+
+    #events{
+        height:100svh;
+        min-height:100svh;
+        max-height:100svh;
+        box-sizing:border-box;
+        overflow:hidden;
+        padding:48px 10px 82px;
+    }
+
+    #events .section-sub{
+        margin-top:0;
+        font-size:10px;
+        letter-spacing:3px;
+    }
+
+    #events .section-title{
+        font-size:38px;
+        line-height:1;
+        white-space:nowrap;
+        margin-top:2px;
+    }
+
+    #events .divider{
+        margin:13px auto 11px;
+    }
+
+    #events .events{
+        width:100%;
+        max-width:330px;
+        margin:0 auto;
+    }
+
+    #events .event-book{
+        width:100%;
+        max-width:330px;
+        height:350px;
+        margin:0 auto;
+        perspective:1800px;
+    }
+
+    #events .book-left-content{
+        padding:8px;
+    }
+
+    #events .book-left-ornament{
+        font-size:30px;
+        margin-bottom:7px;
+    }
+
+    #events .book-left-content h3{
+        font-size:19px;
+        line-height:1.05;
+    }
+
+    #events .book-left-content p{
+        font-size:10px;
+        line-height:1.2;
+        margin-top:6px;
+    }
+
+    #events .event-page-image{
+        height:112px;
+    }
+
+    #events .event-page-info{
+        padding:7px 9px 8px;
+        overflow:hidden;
+    }
+
+    #events .event-page-label{
+        font-size:6px;
+        letter-spacing:1.5px;
+        margin-bottom:2px;
+    }
+
+    #events .event-page-title{
+        font-size:22px;
+        line-height:1;
+        margin-bottom:4px;
+    }
+
+    #events .event-page-meta{
+        gap:2px;
+        margin-bottom:3px;
+    }
+
+    #events .event-page-meta div{
+        font-size:6.5px;
+        line-height:1.2;
+    }
+
+    #events .event-page-description{
+        font-size:10px;
+        line-height:1.18;
+        margin-top:3px;
+    }
+
+    #events .event-page-map{
+        margin-top:5px;
+        padding:5px 9px;
+        font-size:6.5px;
+        letter-spacing:.8px;
+    }
+
+    #events .event-page-number{
+        right:7px;
+        bottom:5px;
+        font-size:7px;
+    }
+
+    #events .event-book-controls{
+        gap:8px;
+        margin-top:7px;
+    }
+
+    #events .event-book-button{
+        min-width:82px;
+        padding:7px 9px;
+        font-size:7px;
+        letter-spacing:.8px;
+    }
+
+    #events .event-book-counter{
+        margin-top:4px;
+        font-size:6.5px;
+        letter-spacing:1.2px;
+    }
+
+    #events > .section-scroll{
+        bottom:18px;
+    }
+
+
+    /* -----------------------------------------
+       VENUE
+       ----------------------------------------- */
+
+    #venue{
+        height:100svh;
+        min-height:100svh;
+        max-height:100svh;
+        box-sizing:border-box;
+        overflow:hidden;
+        padding:50px 14px 82px;
+    }
+
+    #venue .section-sub{
+        margin-top:0;
+        font-size:10px;
+        letter-spacing:3px;
+    }
+
+    #venue .section-title{
+        font-size:40px;
+        line-height:1;
+        margin-top:2px;
+    }
+
+    #venue .divider{
+        margin:13px auto 12px;
+    }
+
+    #venue .venue-card{
+        width:100%;
+        max-width:340px;
+        margin:0 auto;
+        padding:15px 13px;
+        box-sizing:border-box;
+    }
+
+    #venue .venue-icon{
+        font-size:28px;
+    }
+
+    #venue .venue-name{
+        font-size:24px;
+        margin:6px 0;
+    }
+
+    #venue .address{
+        font-size:9.5px;
+        line-height:1.4;
+    }
+
+    #venue .map-button{
+        margin-top:10px;
+        padding:8px 16px;
+        font-size:7.5px;
+        letter-spacing:1.2px;
+    }
+
+    #venue > .section-scroll{
+        bottom:18px;
+    }
+
+}
+
+
+/* Extra-tight sizing for narrow phones. */
+@media(max-width:430px){
+
+    #photo{
+        padding-top:50px;
+        padding-bottom:78px;
+    }
+
+    #photo .section-title{
+        font-size:36px;
+    }
+
+    #photo .photo-frame{
+        max-width:280px;
+    }
+
+    #photo .photo-slider{
+        height:250px;
+    }
+
+
+    #events{
+        padding-top:46px;
+        padding-bottom:78px;
+    }
+
+    #events .section-title{
+        font-size:35px;
+    }
+
+    #events .events,
+    #events .event-book{
+        max-width:305px;
+    }
+
+    #events .event-book{
+        height:330px;
+    }
+
+    #events .event-page-image{
+        height:103px;
+    }
+
+    #events .event-page-title{
+        font-size:20px;
+    }
+
+    #events .event-page-description{
+        font-size:9.2px;
+    }
+
+    #events .event-page-meta div{
+        font-size:6.1px;
+    }
+
+
+    #venue{
+        padding-top:46px;
+        padding-bottom:78px;
+    }
+
+    #venue .section-title{
+        font-size:36px;
+    }
+
+    #venue .venue-card{
+        max-width:315px;
+        padding:13px 11px;
+    }
+
+    #venue .address{
+        font-size:9px;
+    }
+
+}
+
 /* =========================================================
    DESKTOP
 ========================================================= */
@@ -2579,155 +2916,6 @@ section{
         transition-duration:.01ms!important;
 
         scroll-behavior:auto!important;
-    }
-
-}
-
-
-
-/* =========================================================
-   FINAL HERO FIX — DESKTOP + MOBILE
-   Keeps the greeting and names centered inside the temple gate
-   and prevents the text from drifting off-screen on phones.
-========================================================= */
-
-.hero-inner{
-    position:absolute;
-    top:70%;
-    left:50%;
-    right:auto;
-    width:100%;
-    max-width:900px;
-    padding:0 20px;
-    box-sizing:border-box;
-    margin:0;
-    z-index:2;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    transform:translate(-50%, -50%);
-}
-
-.hero-small{
-    font-size:10px;
-    letter-spacing:3px;
-    color:#5A1F2B;
-    text-shadow:
-        0 1px 2px rgba(255,255,255,.95),
-        0 2px 4px rgba(0,0,0,.20);
-}
-
-.hero h1{
-    width:100%;
-    margin:18px 0;
-    font-size:clamp(52px,10vw,82px);
-    line-height:.95;
-}
-
-.hero h1 .name-one{
-    margin-bottom:10px;
-}
-
-.hero h1 .ampersand{
-    margin:0 0 10px;
-}
-
-.hero h1 .name-two{
-    margin:0;
-}
-
-/* ---------------------------------------------------------
-   MOBILE
---------------------------------------------------------- */
-
-@media(max-width:600px){
-
-    .hero{
-        padding:0;
-        width:100%;
-        max-width:100%;
-        box-sizing:border-box;
-    }
-
-    .hero-inner{
-        position:absolute;
-        top:59%;
-        left:50%;
-        right:auto;
-        width:100%;
-        max-width:100%;
-        padding:0 12px;
-        box-sizing:border-box;
-        margin:0;
-        transform:translate(-50%, -50%);
-    }
-
-    .hero-small{
-        font-size:8px;
-        letter-spacing:2px;
-        white-space:nowrap;
-        color:#5A1F2B;
-        text-shadow:
-            0 1px 2px rgba(255,255,255,.95),
-            0 2px 4px rgba(0,0,0,.20);
-    }
-
-    .hero h1{
-        width:100%;
-        margin:12px 0;
-        font-size:clamp(46px,13vw,68px);
-        line-height:.92;
-    }
-
-    .hero h1 .name-one{
-        margin-bottom:8px;
-    }
-
-    .hero h1 .ampersand{
-        margin:0 0 8px;
-    }
-
-    .ampersand{
-        font-size:30px;
-    }
-
-    .scroll-down{
-        left:50%;
-        bottom:20px;
-        transform:translateX(-50%);
-    }
-
-}
-
-/* Very small phones */
-@media(max-width:380px){
-
-    .hero-inner{
-        top:58%;
-        padding:0 8px;
-    }
-
-    .hero-small{
-        font-size:7px;
-        letter-spacing:1.7px;
-    }
-
-    .hero h1{
-        margin:10px 0;
-        font-size:clamp(43px,13vw,60px);
-    }
-
-    .hero h1 .name-one{
-        margin-bottom:6px;
-    }
-
-    .hero h1 .ampersand{
-        margin-bottom:6px;
-    }
-
-    .ampersand{
-        font-size:27px;
     }
 
 }
