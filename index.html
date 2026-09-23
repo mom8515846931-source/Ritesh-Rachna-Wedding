@@ -2586,6 +2586,256 @@ section{
 
 }
 
+
+/* =========================================================
+   FINAL RESPONSIVE FIXES — HERO + WEDDING EVENTS
+   Keeps the original design/animations while fitting
+   the first and events pages inside one mobile viewport.
+========================================================= */
+
+/* 1) COUPLE PHOTO — SHOW THE COMPLETE IMAGE */
+.hero{
+    background-size:contain !important;
+    background-position:center center !important;
+    background-repeat:no-repeat !important;
+    background-color:#f8e8e8;
+    animation:none !important;
+}
+
+.invitation.show .hero{
+    animation:none !important;
+}
+
+/* 2) WEDDING EVENTS — FIT THE WHOLE SECTION IN ONE SCREEN */
+#events{
+    height:100svh;
+    min-height:100svh;
+    max-height:100svh;
+    padding:clamp(52px,7vh,78px) 14px 62px;
+    overflow:hidden;
+    justify-content:flex-start;
+}
+
+@supports (height:100dvh){
+    #events{
+        height:100dvh;
+        min-height:100dvh;
+        max-height:100dvh;
+    }
+}
+
+#events .section-sub{
+    margin-top:0;
+    flex-shrink:0;
+}
+
+#events .section-title{
+    font-size:clamp(40px,9vw,54px);
+    line-height:1;
+    flex-shrink:0;
+}
+
+#events .divider{
+    margin:12px auto 8px;
+    flex-shrink:0;
+}
+
+#events .events{
+    width:100%;
+    max-width:760px;
+    margin:0 auto;
+    flex:1 1 auto;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+
+/* Full-width page-turn card.
+   This fixes the old half-page/mobile clipping problem. */
+#events .event-book{
+    width:min(94vw,760px);
+    height:min(58vh,500px);
+    max-height:500px;
+    margin:0 auto;
+    flex:0 1 auto;
+    perspective:2200px;
+    overflow:visible;
+}
+
+#events .book-left{
+    width:100%;
+    border-radius:14px;
+}
+
+#events .event-page{
+    width:100%;
+    right:0;
+}
+
+#events .event-page-front{
+    border-radius:14px;
+}
+
+#events .event-page-back{
+    border-radius:14px;
+}
+
+#events .event-page-image{
+    height:34%;
+    min-height:135px;
+}
+
+#events .event-page-info{
+    padding:14px 18px 20px;
+}
+
+#events .event-page-label{
+    font-size:8px;
+    margin-bottom:3px;
+}
+
+#events .event-page-title{
+    font-size:clamp(30px,7vw,39px);
+    margin-bottom:7px;
+}
+
+#events .event-page-meta{
+    gap:3px;
+    margin-bottom:5px;
+}
+
+#events .event-page-meta div{
+    font-size:9px;
+    line-height:1.3;
+}
+
+#events .event-page-description{
+    font-size:15px;
+    line-height:1.3;
+    margin-top:5px;
+}
+
+#events .event-page-map{
+    margin-top:8px;
+    padding:7px 13px;
+}
+
+#events .event-book-controls{
+    margin-top:9px;
+    gap:10px;
+    flex-shrink:0;
+}
+
+#events .event-book-button{
+    min-width:105px;
+    padding:9px 13px;
+    font-size:9px;
+}
+
+#events .event-book-counter{
+    margin-top:5px;
+    font-size:8px;
+    flex-shrink:0;
+}
+
+#events .section-scroll{
+    bottom:9px;
+    z-index:80;
+}
+
+@media(max-width:600px){
+
+    #events{
+        padding:50px 10px 58px;
+    }
+
+    #events .event-book{
+        width:94vw;
+        height:min(55vh,440px);
+    }
+
+    #events .book-left-content{
+        padding:18px;
+    }
+
+    #events .book-left-ornament{
+        font-size:42px;
+        margin-bottom:12px;
+    }
+
+    #events .book-left-content h3{
+        font-size:25px;
+    }
+
+    #events .book-left-content p{
+        font-size:14px;
+        margin-top:8px;
+    }
+
+    #events .event-page-image{
+        height:31%;
+        min-height:115px;
+    }
+
+    #events .event-page-info{
+        padding:12px 15px 17px;
+    }
+
+    #events .event-page-title{
+        font-size:31px;
+    }
+
+    #events .event-page-meta div{
+        font-size:8px;
+    }
+
+    #events .event-page-description{
+        font-size:14px;
+        line-height:1.25;
+    }
+
+    #events .event-page-map{
+        margin-top:7px;
+        font-size:7px;
+        padding:6px 11px;
+    }
+
+    #events .event-book-button{
+        min-width:100px;
+        padding:9px 12px;
+    }
+}
+
+@media(max-width:380px){
+
+    #events{
+        padding:46px 8px 55px;
+    }
+
+    #events .event-book{
+        height:min(53vh,400px);
+    }
+
+    #events .event-page-image{
+        min-height:100px;
+    }
+
+    #events .event-page-title{
+        font-size:28px;
+    }
+
+    #events .event-page-description{
+        font-size:13px;
+    }
+
+    #events .event-book-button{
+        min-width:94px;
+        padding:8px 10px;
+    }
+}
+
 </style>
 
 </head>
