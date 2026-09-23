@@ -347,11 +347,12 @@ section{
 
     background:
         url('couple.jpg')
-        center 28%/
-        cover no-repeat;
+        center center/
+        contain no-repeat;
 
-    background-size:cover;
-    background-position:center 28%;
+    background-size:contain;
+    background-position:center center;
+    background-color:#f8e8e8;
 
     display:flex;
 
@@ -376,11 +377,7 @@ section{
 
 .invitation.show .hero{
 
-    animation:
-        heroBackground
-        5.5s
-        cubic-bezier(.22,1,.36,1)
-        forwards;
+    animation:none;
 }
 
 @keyframes heroBackground{
